@@ -1,25 +1,18 @@
-<?php
-get_header(); ?>
+<?php get_header(); ?>
 
-<main id="site-content">
+<main>
+    <h1><?php _e('Bienvenue sur mon site', 'text-domain'); ?></h1>
     <?php
-    if ( have_posts() ) :
-        while ( have_posts() ) :
-            the_post();
-            ?>
-            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <h1><?php the_title(); ?></h1>
-                <div class="entry-content">
-                    <?php the_content(); ?>
-                </div>
-            </article>
-            <?php
-        endwhile;
-    else :
-        echo '<p>Aucun contenu disponible.</p>';
-    endif;
+        if (have_posts()) :
+            while (have_posts()) : the_post();
+                the_title('<h2>', '</h2>');
+                the_excerpt();
+            endwhile;
+        else :
+            _e('Aucun contenu disponible.', 'text-domain');
+        endif;
     ?>
 </main>
 
-<?php
-get_footer();
+<?php get_footer(); ?>
+
