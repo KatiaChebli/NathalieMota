@@ -10,6 +10,8 @@
         </nav>
     </div>
 </footer>
+<?php get_template_part('template_parts/contact-modal'); ?>
+<button class="open-contact-modal">Contacter</button>
 
 <?php wp_footer(); ?>
 </body>
