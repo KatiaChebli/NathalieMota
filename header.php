@@ -10,26 +10,27 @@
 
 <body <?php body_class(); ?>>
     <header class="site-header">
-        <div class="container">
-
-            <!-- Logo -->
-            <div class="site-logo">
-                <a href="<?php echo esc_url(home_url('/')); ?>">
-                    <img src="<?php echo get_template_directory_uri(); ?>/Photos NMota/logo(2).png" alt="<?php bloginfo('name'); ?>">
-                </a>
-            </div>
-
-            <!-- Menu de navigation -->
-            <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>">
-                <?php
-                    wp_nav_menu([
-                        'theme_location' => 'main-menu',
-                        'container' => false,
-                        'menu_class' => 'main-navigation',
-                    ]);
-                ?>
-            </nav>
+    <div class="header-container">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="<?php echo home_url(); ?>">
+                <img src="<?php echo get_template_directory_uri(); ?>/logo(1).png" alt="Nathalie Mota Logo">
+            </a>
         </div>
+
+        <!-- Menu de navigation -->
+        <nav class="main-navigation">
+            <?php
+            wp_nav_menu(
+                array(
+                    'theme_location' => 'primary',
+                    'container'      => false,
+                    'menu_class'     => 'nav-menu',
+                )
+            );
+            ?>
+        </nav>
+    </div>
     </header>
 
 
