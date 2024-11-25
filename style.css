@@ -82,52 +82,30 @@ Text Domain: nathaliemota
 }
 
 /*MODALE CONTACT*/
-/* Styles de la modale */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
+/*bouton modal*/
+/* Assurez-vous que les éléments du menu sont bien alignés */
+.nav-menu {
+    display: flex;
     align-items: center;
 }
 
-.modal-content {
-    background-color: #fff;
-    padding: 20px;
-    width: 400px;
-    border-radius: 5px;
-    position: relative;
+.nav-menu li {
+    margin-right: 20px; /* Espacement entre les éléments du menu */
 }
 
-.hidden {
-    display: none;
+/* Cibler spécifiquement le bouton de la modale */
+.contact-button-container {
+    margin-left: 20px; /* Espacement entre "À propos" et le bouton Contact */
 }
 
-.close-modal {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-.open-contact-modal {
-    cursor: pointer;
+.contact-button-container .open-contact-modal {
     padding: 10px 20px;
-    background-color: #0073e6;
-    color: #fff;
+    background-color: #ff0073;
+    color: white;
     border: none;
-    font-size: 16px;
     cursor: pointer;
-    text-align: center;
+    font-size: 16px;
+    border-radius: 5px;
 }
 
-.open-contact-modal:hover {
-    background-color: #005bb5;
-}
+
