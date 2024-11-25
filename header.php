@@ -29,6 +29,10 @@
                 )
             );
             ?>
+            <?php get_template_part('template_parts/contact-modal'); ?>
+            <div class="contact-button-container">
+            <button class="open-contact-modal">Contact</button>
+            </div>
         </nav>
     </div>
     </header>
