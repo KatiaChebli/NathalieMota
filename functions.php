@@ -18,9 +18,10 @@ add_action( 'after_setup_theme', 'nathaliemota_register_menus' );
 
 //charger fichier js
 function theme_enqueue_scripts() {
-    wp_enqueue_script('theme-scripts', get_template_directory_uri() . '/js/scripts.js', [], false, true);
+    wp_enqueue_script('custom-scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0', true);
 }
-add_action('wp_enqueue_scripts', 'nathaliemota_enqueue_scripts');
+add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
+
 
 
 ?>
