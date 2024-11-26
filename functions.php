@@ -1,9 +1,13 @@
 <?php
-// Ajout du styles 
-function nathaliemota_enqueue_scripts() {
-    wp_enqueue_style( 'style', get_stylesheet_uri() );
+// Charger les styles et scripts
+function nathaliemota_enqueue_assets() {
+    // Charger le style principal
+    wp_enqueue_style('style', get_stylesheet_uri());
+
+    // Charger le script pour la modale
+    wp_enqueue_script('modal-scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0', true);
 }
-add_action( 'wp_enqueue_scripts', 'nathaliemota_enqueue_scripts' );
+add_action('wp_enqueue_scripts', 'nathaliemota_enqueue_assets');
 
 // Ajout des menus
 function nathaliemota_register_menus() {
@@ -13,15 +17,4 @@ function nathaliemota_register_menus() {
         )
     );
 }
-add_action( 'after_setup_theme', 'nathaliemota_register_menus' );
-
-
-//charger fichier js
-function theme_enqueue_scripts() {
-    wp_enqueue_script('custom-scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0', true);
-}
-add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
-
-
-
-?>
+add_action('after_setup_theme', 'nathaliemota_register_menus');
