@@ -10,7 +10,6 @@
 
 <body <?php body_class(); ?>>
     <header class="site-header">
-    <div class="header-container">
         <!-- Logo -->
         <div class="logo">
             <a href="<?php echo home_url(); ?>">
@@ -30,9 +29,8 @@
             );
             ?>
             <?php get_template_part('template_parts/contact-modal'); ?>
-            <button class="open-contact-modal">Contact</button>
+            <!-- <button class="open-contact-modal">Contact</button> -->
         </nav>
-    </div>
     </header>
 
 
