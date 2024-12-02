@@ -15,7 +15,13 @@ Text Domain: nathaliemota
 
 /* Navigation */
 .site-header {
-    padding: 0 100px;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+}
+.logo {
+    width: 70%;
+    padding: 30px;
 }
 .site-header .main-navigation .nav-menu {
     list-style: none;
@@ -25,7 +31,8 @@ Text Domain: nathaliemota
 }
 
 .site-header .main-navigation .nav-menu li {
-    display: inline-block;
+    display: flex !important;
+    justify-content: end !important;
 }
 
 .site-header .main-navigation .nav-menu a {
@@ -43,7 +50,6 @@ Text Domain: nathaliemota
 #menu-menu-principal {
     display: flex;
     justify-content: end;
-    
 }
 
 /********************* HEADER **********************/
@@ -93,7 +99,8 @@ Text Domain: nathaliemota
     font-family: Space Mono !important;
     font-size: 16px !important;
     text-transform: uppercase;
-    
+    display: flex !important;
+    justify-content: end !important;
     border: none !important;
 }
 #contact-modal {
