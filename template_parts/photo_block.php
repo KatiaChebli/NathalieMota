@@ -1,9 +1,6 @@
 <?php
-// Assurez-vous que cette ligne est utilisée WordPress.
+// Assure que cette ligne est utilisée WordPress.
 if (!defined('ABSPATH')) exit;
-
-// Obtenez les données nécessaires si elles ne sont pas passées directement
-if (!isset($post)) $post = get_post();
 ?>
 
 <div class="related-photo-item">
