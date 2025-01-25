@@ -1,91 +1,100 @@
 <?php
 /**
- * Template Name: Single Photo 1
+ * Template Name: Single Photo
  */
 
-get_header();
+get_header(); 
 ?>
 
-<?php if (have_posts()) : ?>
-    <?php while (have_posts()) : the_post(); ?>
-        <div class="single-photo-page">
-            <div class="title-photo">
-                <h1 class="photo-title"><?php the_title(); ?></h1>
-            </div>
+<main class="single-photo-page">
+    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+        <div class="photo-container">
 
-            <div class="photo-image">
-                <?php the_post_thumbnail('large'); ?>
-            </div>
-
+            <!-- Colonne gauche -->
             <div class="photo-details">
-                <p><strong>Référence :</strong> <?php echo esc_html(get_post_meta(get_the_ID(), 'reference', true)); ?></p>
-                <p><strong>Catégorie :</strong> 
-                    <?php
-                    $terms = get_the_terms(get_the_ID(), 'categorie');
-                    if (!is_wp_error($terms) && !empty($terms)) {
-                        foreach ($terms as $term) {
-                            echo esc_html($term->name) . ' ';
-                        }
-                    } else {
-                        echo 'Non classé';
-                    }
-                    ?>
-                </p>
-                <p><strong>Format :</strong> <?php echo esc_html(get_post_meta(get_the_ID(), 'format', true)); ?></p>
-                <p><strong>Type :</strong> <?php echo esc_html(get_post_meta(get_the_ID(), 'type', true)); ?></p>
-                <p><strong>Année :</strong> <?php echo esc_html(get_post_meta(get_the_ID(), 'annee', true)); ?></p>
-            </div>
+    <h1 class="photo-title"><?php the_title(); ?></h1>
 
-            <div class="contact">
-                <p>Cette photo vous intéresse ?</p>
-                <?php get_template_part('template_parts/contact-modal'); ?>
-            </div>
+    <div class="photo-details">
 
-            <div class="photo-navigation">
-                <?php previous_post_link('%link', '← Précédente'); ?>
-                <?php next_post_link('%link', 'Suivante →'); ?>
-            </div>
-        </div>
+    <p><strong>Référence :</strong> 
+        <?php
+        $reference = SCF::get('Références'); 
+        echo !empty($reference) ? esc_html($reference) : 'Non spécifié';
+        ?>
+    </p>
 
-        <div class="related-photos-container"> 
+    <p><strong>Format :</strong> 
+        <?php
+        $format = SCF::get('Format'); 
+        echo !empty($format) ? esc_html($format) : 'Non spécifié';
+        ?>
+    </p>
+
+    <p><strong>Type :</strong> 
+        <?php
+        $type = SCF::get('Type'); 
+        echo !empty($type) ? esc_html($type) : 'Non spécifié';
+        ?>
+    </p>
+
+    <p><strong>Année :</strong> 
+        <?php
+        $annee = SCF::get('Année'); 
+        echo !empty($annee) ? esc_html($annee) : 'Non spécifié';
+        ?>
+    </p>
+
+        <pre>
+    <?php print_r(get_post_meta(get_the_ID())); ?>
+</pre>
+
+    </div>
+    <div class="line-above1"></div>
+    <div class="contact">
+        <p>Cette photo vous intéresse ?</p>
+        <button id="open-modal">Contact</button>
+        <?php get_template_part('template_parts/contact-modal'); ?>
+    </div>
+</div>
+
+<!-- Photos apparentées -->
+<div class="line-above2"></div>
+<div class="related-photos-container">
             <h2>Vous aimerez aussi</h2>
-            <div class="related-photos-grid">
-                <?php
-                $current_id = get_the_ID();
-                $categories = get_the_terms($current_id, 'categorie');
-                $category_ids = [];
 
-                if (!is_wp_error($categories) && !empty($categories)) {
-                    foreach ($categories as $category) {
-                        $category_ids[] = $category->term_id;
-                    }
-                }
+            <?php
+        $current_post_id = get_the_ID(); // ID de l'article actuel
+        $args = array(
+            'post_type'      => 'photo', // Type de contenu personnalisé
+            'posts_per_page' => 2,       // Limiter à 2 photos
+            'post__not_in'   => array($current_post_id), // Exclure l'article actuel
+            'orderby'        => 'rand', // Afficher aléatoirement
+        );
 
-                $related_query = new WP_Query(array(
-                    'post_type'      => 'photo',
-                    'posts_per_page' => 2,
-                    'post__not_in'   => array($current_id),
-                    'tax_query'      => array(
-                        array(
-                            'taxonomy' => 'categorie',
-                            'field'    => 'term_id',
-                            'terms'    => $category_ids,
-                        ),
-                    ),
-                ));
+        $related_photos_query = new WP_Query($args);
 
-                if ($related_query->have_posts()) :
-                    while ($related_query->have_posts()) : $related_query->the_post();
-                        get_template_part('templates_parts/photo_block');
-                    endwhile;
-                    wp_reset_postdata();
-                else :
-                    echo '<p>Aucune photo apparentée trouvée.</p>';
-                endif;
-                ?>
-            </div>
-        </div>
-    <?php endwhile; ?>
-<?php endif; ?>
+        if ($related_photos_query->have_posts()) :
+            while ($related_photos_query->have_posts()) :
+                $related_photos_query->the_post(); ?>
+
+                <div class="related-photo">
+                    <a href="<?php the_permalink(); ?>">
+                        <?php if (has_post_thumbnail()) : ?>
+                            <?php the_post_thumbnail('medium'); // Afficher l'image de taille moyenne ?>
+                        <?php endif; ?>
+                        <h3><?php the_title(); ?></h3>
+                    </a>
+                </div>
+
+            <?php endwhile;
+            wp_reset_postdata(); // Réinitialiser la requête principale
+        else : ?>
+            <p>Aucune photo disponible.</p>
+        <?php endif; ?>
+    </div>
+
+
+    <?php endwhile; endif; ?>
+</main>
 
 <?php get_footer(); ?>

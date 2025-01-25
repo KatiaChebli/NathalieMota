@@ -52,41 +52,6 @@ Text Domain: nathaliemota
     justify-content: end;
 }
 
-/********************* HEADER **********************/
-
-.footer-line {
-    border: none;
-    border-top: 1px solid #000; /* Ligne noire */
-    margin: 10px 0 20px;
-    width: 100%; /* La ligne s'étend sur toute la largeur */
-    position: relative;
-    left: 0;
-    }
-    
-
-/* Navigation dans le footer */
-.footer-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 30px; /* Espacement entre les liens */
-}
-
-.footer-nav ul li {
-    display: inline-block;
-}
-
-.footer-nav ul li a {
-    text-decoration: none;
-    font-family: Space Mono;
-    text-transform: uppercase;
-    font-size: 14px;
-    color: #000; /* Noir */
-    text-transform: u
-}
-
 /*MODALE CONTACT*/
 /*bouton modal*/
 
@@ -172,4 +137,58 @@ Text Domain: nathaliemota
     justify-content: center !important;
     font-family: Space Mono !important;
     font-size: 12px !important;
+}
+
+/********************* HEADER **********************/
+/*******Single page********/
+.line-above1 {
+    border: none;
+    border-top: 1px solid #000; /* Ligne noire */
+    margin: 10px 0 20px;
+    width: 50%; /* La ligne s'étend sur  la largeur */
+    position: relative;
+    left: 0;
+    }
+
+.line-above2 {
+    border: none;
+    border-top: 1px solid #000; /* Ligne noire */
+    margin: 10px 0 20px;
+    width: 100%; /* La ligne s'étend sur  la largeur */
+    position: relative;
+}
+
+/********************* FOOTER **********************/
+
+.footer-line {
+    border: none;
+    border-top: 1px solid #000; /* Ligne noire */
+    margin: 10px 0 20px;
+    width: 100%; /* La ligne s'étend sur toute la largeur */
+    position: relative;
+    left: 0;
+    }
+    
+
+/* Navigation dans le footer */
+.footer-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Espacement entre les liens */
+}
+
+.footer-nav ul li {
+    display: inline-block;
+}
+
+.footer-nav ul li a {
+    text-decoration: none;
+    font-family: Space Mono;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #000; /* Noir */
+    text-transform: u
 }
