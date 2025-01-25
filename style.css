@@ -158,6 +158,28 @@ Text Domain: nathaliemota
     position: relative;
 }
 
+/*****Hero******/
+.hero {
+    height: 100vh; /* Hauteur de la fenêtre visible */
+    background-size: cover; /* Ajuste l'image pour couvrir toute la div */
+    background-position: center; /* Centre l'image */
+    display: flex; /* Active le flexbox pour centrer le contenu */
+    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement */
+    position: relative; /* Nécessaire si vous ajoutez des overlays */
+}
+
+.hero-content h1 {
+font-size: 90px; /* Taille du texte */
+line-height: 142.18px; /* Hauteur de ligne */
+font-weight: bold; /* Texte en gras */
+color: transparent; /* Texte transparent */
+-webkit-text-stroke: 2px white; /* Contour blanc de 2px */
+font-family: Space Mono;
+font-style: italic;
+}
+
+
 /********************* FOOTER **********************/
 
 .footer-line {

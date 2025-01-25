@@ -23,27 +23,26 @@ add_action('after_setup_theme', 'nathaliemota_register_menus');
 // Etape5
 
 function get_random_hero_image() {
-    // Récupérer les images du custom post type ou d'une catégorie spécifique
+    // Modifier la requête pour récupérer les photos du custom post type "photo"
     $args = array(
-        'post_type' => 'attachment', // Si les images sont des médias
-        'post_mime_type' => 'image', // Type image
-        'post_status' => 'inherit', // Statut des fichiers
-        'posts_per_page' => -1, // Récupérer toutes les images
-        'tax_query' => array(
-            array(
-                'taxonomy' => 'category', // Adapter avec la taxonomie utilisée
-                'field'    => 'slug',
-                'terms'    => 'hero-images', // Nom de la catégorie d'images
-            ),
-        ),
+        'post_type'      => 'Photos', // slug custom post type
+        'post_status'    => 'publish', // photos publiées
+        'posts_per_page' => -1, // Récupérer toutes les photos disponibles
     );
 
-    $images = get_posts($args);
-    if (!empty($images)) {
-        $random_image = $images[array_rand($images)]; // Sélectionne une image aléatoire
-        return wp_get_attachment_url($random_image->ID); // Retourne l'URL de l'image
+    // Récupérer les publications du type "photo"
+    $photos = get_posts($args);
+
+    if (!empty($photos)) {
+        // Sélectionner une photo aléatoire
+        $random_photo = $photos[array_rand($photos)];
+        
+        // Récupérer l'URL de l'image en tant qu'image mise en avant
+        if (has_post_thumbnail($random_photo->ID)) {
+            return get_the_post_thumbnail_url($random_photo->ID, 'full');
+        }
     }
 
-    // Image par défaut si aucune image n'est trouvée
-    return get_template_directory_uri() . '/assets/images/default-hero.jpg';
+    // Si aucune photo ou image mise en avant, retourner une image par défaut
+    return get_template_directory_uri() . '/images/cat(1).png';
 }
