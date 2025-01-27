@@ -25,7 +25,7 @@ get_header();
 
     <p><strong>Format :</strong> 
         <?php
-        $format = SCF::get('Format'); 
+        $format = SCF::get('Formats'); 
         echo !empty($format) ? esc_html($format) : 'Non spécifié';
         ?>
     </p>
@@ -39,7 +39,7 @@ get_header();
 
     <p><strong>Année :</strong> 
         <?php
-        $annee = SCF::get('Année'); 
+        $annee = SCF::get('Années'); 
         echo !empty($annee) ? esc_html($annee) : 'Non spécifié';
         ?>
     </p>
@@ -65,8 +65,8 @@ get_header();
             <?php
         $current_post_id = get_the_ID(); // ID de l'article actuel
         $args = array(
-            'post_type'      => 'photo', // Type de contenu personnalisé
-            'posts_per_page' => 2,       // Limiter à 2 photos
+            'post_type'      => 'Photos', // Type de contenu 
+            'posts_per_page' => 2,       // 2 photos
             'post__not_in'   => array($current_post_id), // Exclure l'article actuel
             'orderby'        => 'rand', // Afficher aléatoirement
         );
