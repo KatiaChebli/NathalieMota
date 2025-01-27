@@ -179,6 +179,59 @@ font-family: Space Mono;
 font-style: italic;
 }
 
+/*****Affichage des filtres******/
+#photo-filters {
+    display: flex;
+    justify-content: space-between; /* Séparer les filtres */
+    align-items: center;
+    gap: 15px; /* Espacement entre les filtres */
+    margin-bottom: 20px; /* Espacement en dessous des filtres */
+    margin-top: 60px;
+    padding: 10px;
+}
+
+#photo-filters select,
+#photo-filters input,
+#photo-filters button {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    cursor: pointer;
+}
+
+#photo-filters button {
+    background: #333; /* Couleur du bouton */
+    color: #fff;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+/****Affichage des photo dans home*****/
+#photo-results {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
+    gap: 5px; /* Espacement entre les éléments */
+    padding: 20px; /* Espacement autour du conteneur */
+}
+
+.photo-item {
+    text-align: center; /* Centrer le titre */
+    background-color: #f8f8f8; /* Fond clair (optionnel) */
+    border-radius: 10px; /* Coins arrondis */
+    overflow: hidden; /* Gérer le contenu qui dépasse */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Légère ombre */
+    width: 50%; /* Réduit la largeur de chaque photo */
+    margin: 0 auto; /* Centre les items */
+}
+
+.photo-item img {
+    width: 100%; /* Image responsive */
+    height: auto; /* Respecte les proportions */
+    border-radius: 5px; /* Coins arrondis pour les images */
+}
+
 
 /********************* FOOTER **********************/
 

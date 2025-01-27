@@ -1,3 +1,4 @@
+// modal contact
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('contact-modal');
     const closeModalBtn = document.querySelector('.close-modal');
@@ -24,6 +25,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// hero en-tête
+// ETAPE 4 filtres Ajax
+document.getElementById('photo-filters').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const format = document.getElementById('format').value;
+    const category = document.getElementById('category').value;
+    const orderBy = document.getElementById('order_by').value;
+
+    const params = new URLSearchParams({
+        format: format,
+        category: category,
+        order_by: orderBy,
+    });
+
+    fetch(ajaxurl + '?action=filter_photos&' + params.toString(), {
+        method: 'GET',
+    })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('photo-results').innerHTML = data; // Met à jour les résultats
+        })
+        .catch(error => console.error('Erreur :', error));
+});
+
+
+//ETAPE 4 affichage des photos Ajax
+document.getElementById('photo-filters').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const params = new URLSearchParams(formData);
+
+    fetch(ajaxurl + '?action=filter_photos&' + params.toString(), {
+        method: 'GET',
+    })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('photo-results').innerHTML = data;
+        })
+        .catch(error => console.error('Erreur:', error));
+});
+
+
 
 
