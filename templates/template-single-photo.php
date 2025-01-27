@@ -18,28 +18,28 @@ get_header();
 
     <p><strong>Référence :</strong> 
         <?php
-        $reference = SCF::get('Références'); 
+        $reference = SCF::get('reference'); 
         echo !empty($reference) ? esc_html($reference) : 'Non spécifié';
         ?>
     </p>
 
     <p><strong>Format :</strong> 
         <?php
-        $format = SCF::get('Formats'); 
+        $format = SCF::get('format'); 
         echo !empty($format) ? esc_html($format) : 'Non spécifié';
         ?>
     </p>
 
     <p><strong>Type :</strong> 
         <?php
-        $type = SCF::get('Type'); 
+        $type = SCF::get('type'); 
         echo !empty($type) ? esc_html($type) : 'Non spécifié';
         ?>
     </p>
 
     <p><strong>Année :</strong> 
         <?php
-        $annee = SCF::get('Années'); 
+        $annee = SCF::get('Année',67); 
         echo !empty($annee) ? esc_html($annee) : 'Non spécifié';
         ?>
     </p>
@@ -82,7 +82,6 @@ get_header();
                         <?php if (has_post_thumbnail()) : ?>
                             <?php the_post_thumbnail('medium'); // Afficher l'image de taille moyenne ?>
                         <?php endif; ?>
-                        <h3><?php the_title(); ?></h3>
                     </a>
                 </div>
 

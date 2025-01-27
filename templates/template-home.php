@@ -50,15 +50,24 @@ get_header();
 
 <!-- affichage des photos -->
 <div id="photo-results">
+
     <?php
     $query = new WP_Query(array('post_type' => 'photos', 'posts_per_page' => 12));
+    ?>
+
+    <?php
+    $page = get_page_by_path('single-page');
+    $page_url = get_permalink($page->ID);
     if ($query->have_posts()) :
         while ($query->have_posts()) : $query->the_post();
-            ?>
+        $id= get_the_ID();
+        ?>
+        <a href="<?php echo esc_url( $page_url ) . '?postid=' . $id; ?>">
             <div class="photo-item">
                 <?php the_post_thumbnail(); ?>
-                <h3><?php the_title(); ?></h3>
+                <h3><?php echo get_the_ID(); ?></h3>
             </div>
+            </a>
             <?php
         endwhile;
         wp_reset_postdata();
@@ -66,6 +75,7 @@ get_header();
         echo '<p>Aucune photo trouvée.</p>';
     endif;
     ?>
+    
 </div>
 
 <!-- Bouton Charger plus -->

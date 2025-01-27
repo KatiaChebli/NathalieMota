@@ -232,6 +232,13 @@ font-style: italic;
     border-radius: 5px; /* Coins arrondis pour les images */
 }
 
+/********Affichage Single Photo********/
+
+.related-photo {
+    display: flex;
+    justify-content: space-between; /* Espace entre les éléments */
+    align-items: center;
+}
 
 /********************* FOOTER **********************/
 

@@ -88,7 +88,7 @@ function filter_photos() {
     // Trier par Année
     if ($order_by === 'annee-asc') {
         $args['meta_query'][] = array(
-            'key'     => 'Annees',
+            'key'     => 'annee',
             'type'    => 'NUMERIC',
             'compare' => 'EXISTS',
         );
@@ -97,7 +97,7 @@ function filter_photos() {
     }
     if ($order_by === 'annee-desc') {
         $args['meta_query'][] = array(
-            'key'     => 'Années',
+            'key'     => 'annees',
             'type'    => 'NUMERIC',
             'compare' => 'EXISTS',
         );
@@ -107,24 +107,24 @@ function filter_photos() {
 
     // Trier par Référence
     if ($order_by === 'reference-asc') {
-        $args['meta_key'] = 'Références';
+        $args['meta_key'] = 'reference';
         $args['orderby'] = 'meta_value';
         $args['order'] = 'ASC';
     }
     if ($order_by === 'reference-desc') {
-        $args['meta_key'] = 'Références';
+        $args['meta_key'] = 'reference';
         $args['orderby'] = 'meta_value';
         $args['order'] = 'DESC';
     }
 
     // Trier par Type
     if ($order_by === 'type-asc') {
-        $args['meta_key'] = 'Type';
+        $args['meta_key'] = 'type';
         $args['orderby'] = 'meta_value';
         $args['order'] = 'ASC';
     }
     if ($order_by === 'type-desc') {
-        $args['meta_key'] = 'Type';
+        $args['meta_key'] = 'type';
         $args['orderby'] = 'meta_value';
         $args['order'] = 'DESC';
     }
