@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
 // ETAPE 4 filtres Ajax
 document.getElementById('photo-filters').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -50,7 +51,7 @@ document.getElementById('photo-filters').addEventListener('submit', function (e)
 });
 
 
-//ETAPE 4 affichage des photos Ajax
+//ETAPE 4 affichage des photos
 document.getElementById('photo-filters').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -67,6 +68,25 @@ document.getElementById('photo-filters').addEventListener('submit', function (e)
         .catch(error => console.error('Erreur:', error));
 });
 
+// bouton charger plus photos
+document.getElementById('load-more').addEventListener('click', function () {
+    const button = this;
+    const page = button.getAttribute('data-page'); // Page actuelle
+    const nextPage = parseInt(page) + 1; // Page suivante
 
+    fetch(ajaxurl + '?action=load_more_photos&page=' + nextPage, {
+        method: 'GET',
+    })
+        .then(response => response.text())
+        .then(data => {
+            if (data.trim() !== '') {
+                document.getElementById('photo-results').innerHTML += data; // Ajoute les nouvelles photos
+                button.setAttribute('data-page', nextPage); // Met à jour la page suivante
+            } else {
+                button.style.display = 'none'; // Cache le bouton si plus de photos
+            }
+        })
+        .catch(error => console.error('Erreur :', error));
+});
 
 
