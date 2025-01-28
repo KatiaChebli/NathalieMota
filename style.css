@@ -239,6 +239,14 @@ font-style: italic;
     justify-content: space-between; /* Espace entre les éléments */
     align-items: center;
 }
+.photo-details{
+    display: flex;
+    justify-content: center; /* Vous pouvez utiliser space-between, space-around, ou flex-start */
+    align-items: center;
+}
+.photo-image{
+    max-width: 20px;
+}
 
 /********************* FOOTER **********************/
 
