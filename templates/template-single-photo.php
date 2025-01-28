@@ -8,48 +8,65 @@ get_header();
 
 <main class="single-photo-page">
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-        <div class="photo-container">
 
+    <?php
+// Récupérer l'ID du post depuis URL
+$post_id = isset($_GET['postid']) ? intval($_GET['postid']) : 0;
+
+// Vérifie ID est valide
+if ($post_id && get_post($post_id)) {
+    // Récupérez les informations du post en utilisant son ID
+    $post = get_post($post_id);
+    setup_postdata($post);
+}
+?>
+
+<div class="photo-container">
             <!-- Colonne gauche -->
-            <div class="photo-details">
-    <h1 class="photo-title"><?php the_title(); ?></h1>
-
     <div class="photo-details">
-
-    <p><strong>Référence :</strong> 
-        <?php
-        $reference = SCF::get('reference'); 
-        echo !empty($reference) ? esc_html($reference) : 'Non spécifié';
+       
+        <div class="photo-image">
+            <?php
+            if (has_post_thumbnail($post_id)) {
+            echo get_the_post_thumbnail($post_id, 'large'); // Taille de l'image ('thumbnail', 'medium', 'large', 'full' selon vos besoins)
+            } else {
+            echo '<p>Aucune image disponible pour ce post.</p>';
+        }
         ?>
-    </p>
+        </div>
 
-    <p><strong>Format :</strong> 
-        <?php
-        $format = SCF::get('format'); 
-        echo !empty($format) ? esc_html($format) : 'Non spécifié';
-        ?>
-    </p>
+        <div class="photo-reference">
+            <p><strong>Référence :</strong> 
+            <?php
+            $reference = SCF::get('reference'); 
+            echo !empty($reference) ? esc_html($reference) : 'Non spécifié';
+            ?>
+            </p>
 
-    <p><strong>Type :</strong> 
-        <?php
-        $type = SCF::get('type'); 
-        echo !empty($type) ? esc_html($type) : 'Non spécifié';
-        ?>
-    </p>
+            <p><strong>Format :</strong> 
+            <?php
+            $format = SCF::get('format'); 
+            echo !empty($format) ? esc_html($format) : 'Non spécifié';
+            ?>
+            </p>
 
-    <p><strong>Année :</strong> 
-        <?php
-        $annee = SCF::get('Année',67); 
-        echo !empty($annee) ? esc_html($annee) : 'Non spécifié';
-        ?>
-    </p>
+            <p><strong>Type :</strong> 
+            <?php
+            $type = SCF::get('type'); 
+            echo !empty($type) ? esc_html($type) : 'Non spécifié';
+            ?>
+            </p>
 
-        <pre>
-    <?php print_r(get_post_meta(get_the_ID())); ?>
-</pre>
+            <p><strong>Année :</strong> 
+            <?php
+            $annee = SCF::get('Année'); 
+            echo !empty($annee) ? esc_html($annee) : 'Non spécifié';
+            ?>
+            </p>
+        </div>
+</div>
 
-    </div>
-    <div class="line-above1"></div>
+<div class="line-above1"></div>
     <div class="contact">
         <p>Cette photo vous intéresse ?</p>
         <button id="open-modal">Contact</button>
