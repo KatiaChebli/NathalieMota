@@ -139,24 +139,14 @@ Text Domain: nathaliemota
     font-size: 12px !important;
 }
 
-/********************* HEADER **********************/
-/*******Single page********/
-.line-above1 {
-    border: none;
-    border-top: 1px solid #000; /* Ligne noire */
-    margin: 10px 0 20px;
-    width: 50%; /* La ligne s'étend sur  la largeur */
-    position: relative;
-    left: 0;
-    }
+/********************* Fin HEADER **********************/
 
-.line-above2 {
-    border: none;
-    border-top: 1px solid #000; /* Ligne noire */
-    margin: 10px 0 20px;
-    width: 100%; /* La ligne s'étend sur  la largeur */
-    position: relative;
+/********************* HOME PAGE**********************/
+main {
+    margin-left: 50px; /* Ajoute une marge de 20px à gauche */
+    margin-right: 50px; /* Ajoute une marge de 20px à droite */
 }
+
 
 /*****Hero******/
 .hero {
@@ -187,6 +177,8 @@ font-style: italic;
     gap: 15px; /* Espacement entre les filtres */
     margin-bottom: 20px; /* Espacement en dessous des filtres */
     margin-top: 60px;
+    margin-left: 50px;
+    margin-right: 50px;
     padding: 10px;
 }
 
@@ -208,7 +200,7 @@ font-style: italic;
     transition: background 0.3s ease;
 }
 
-/****Affichage des photo dans home*****/
+/****Affichage des photo *****/
 #photo-results {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
@@ -232,20 +224,86 @@ font-style: italic;
     border-radius: 5px; /* Coins arrondis pour les images */
 }
 
-/********Affichage Single Photo********/
+/********************* Affichage Single Photo *********************/
 
-.related-photo {
+.photo-details {
     display: flex;
-    justify-content: space-between; /* Espace entre les éléments */
-    align-items: center;
+    justify-content: space-between; /* Espace entre les deux blocs */
+    align-items: flex-start; /* Aligne les éléments en haut */
+    gap: 20px; /* Espace entre les deux blocs */
 }
-.photo-details{
+
+.photo-image {
+    flex: 1; /* Permet à l'image de prendre l'espace nécessaire */
     display: flex;
-    justify-content: center; /* Vous pouvez utiliser space-between, space-around, ou flex-start */
-    align-items: center;
+    justify-content: center;
 }
-.photo-image{
-    max-width: 20px;
+.photo-image img {
+    width: 70%;
+    height: 70%;
+}
+
+.photo-reference {
+    flex: 1; /* Permet aux références de prendre également l'espace nécessaire */
+    width: 40%;
+    margin-top: auto;
+    font-family: Space Mono;
+    font-size: 14px;
+    font-weight: 400px;
+}
+.photo-title{
+    font-family: Space Mono;
+    font-size: 66px;
+    font-style: italic;
+    font-weight:400px;
+}
+
+.contact {
+    display: flex; /* Active le mode flexbox */
+    align-items: center; /* Centre verticalement les éléments */
+    gap: 40%; /* Espace entre le <p> et le bouton/modal */
+}
+
+.contact p {
+    margin: 0; /* Enlève les marges par défaut */
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 300px;
+}
+
+.line-above1 { /***** 1e ligne*******/
+    border: none;
+    border-top: 1px solid #000; /* Ligne noire */
+    margin: 10px 0 30px;
+    width: 58%; /* La ligne s'étend sur  la largeur */
+    position: relative;
+    left: 0;
+    }
+
+.line-above2 { /***** 2e ligne ******/
+    border: none;
+    border-top: 1px solid #000; /* Ligne noire */
+    margin: 30px 0 45px;
+    width: 100%; /* La ligne s'étend sur  la largeur */
+    position: relative;
+}
+.related-photos-container h2{
+    font-family: Space Mono;
+    font-size: 18px;
+    font-weight: 400px;
+    line-height: 26.66px;
+    margin-bottom: 30px;
+}
+
+.related-photos{
+    display: flex;
+    justify-content: space-around; /* Espace entre les deux blocs */
+    align-items: flex-start; /* Aligne les éléments en haut */
+    gap: 0px; /* Espace entre les deux blocs */
+}
+.related-photos img {
+    width: 160%;
+    height: 160%;
 }
 
 /********************* FOOTER **********************/
