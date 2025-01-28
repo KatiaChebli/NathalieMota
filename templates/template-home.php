@@ -65,7 +65,7 @@ get_header();
         <a href="<?php echo esc_url( $page_url ) . '?postid=' . $id; ?>">
             <div class="photo-item">
                 <?php the_post_thumbnail(); ?>
-                <h3><?php echo get_the_ID(); ?></h3>
+                <!-- <h3><?php echo get_the_ID(); ?></h3> -->
             </div>
             </a>
             <?php
