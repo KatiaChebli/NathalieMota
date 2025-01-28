@@ -24,18 +24,9 @@ if ($post_id && get_post($post_id)) {
 <div class="photo-container">
             <!-- Colonne gauche -->
     <div class="photo-details">
-       
-        <div class="photo-image">
-            <?php
-            if (has_post_thumbnail($post_id)) {
-            echo get_the_post_thumbnail($post_id, 'large'); // Taille de l'image ('thumbnail', 'medium', 'large', 'full' selon vos besoins)
-            } else {
-            echo '<p>Aucune image disponible pour ce post.</p>';
-        }
-        ?>
-        </div>
+    <div class="photo-reference">
 
-        <div class="photo-reference">
+    <h1 class="photo-title"> <?php echo get_the_title(); ?></h1>
             <p><strong>Référence :</strong> 
             <?php
             $reference = SCF::get('reference'); 
@@ -64,6 +55,18 @@ if ($post_id && get_post($post_id)) {
             ?>
             </p>
         </div>
+
+        <div class="photo-image">
+            <?php
+            if (has_post_thumbnail($post_id)) {
+            echo get_the_post_thumbnail($post_id, 'large'); // Taille de l'image ('thumbnail', 'medium', 'large', 'full' selon vos besoins)
+            } else {
+            echo '<p>Aucune image disponible pour ce post.</p>';
+        }
+        ?>
+        </div>
+
+       
 </div>
 
 <div class="line-above1"></div>
@@ -78,7 +81,7 @@ if ($post_id && get_post($post_id)) {
 <div class="line-above2"></div>
 <div class="related-photos-container">
             <h2>Vous aimerez aussi</h2>
-
+            <div class="related-photos">
             <?php
         $current_post_id = get_the_ID(); // ID de l'article actuel
         $args = array(
@@ -107,6 +110,7 @@ if ($post_id && get_post($post_id)) {
         else : ?>
             <p>Aucune photo disponible.</p>
         <?php endif; ?>
+        </div>
     </div>
 
 
