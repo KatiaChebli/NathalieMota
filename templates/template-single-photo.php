@@ -34,6 +34,13 @@ if ($post_id && get_post($post_id)) {
             ?>
             </p>
 
+            <p><strong>Catégorie :</strong> 
+            <?php
+            $reference = SCF::get('categorie'); 
+            echo !empty($categorie) ? esc_html($categorie) : 'Non spécifié';
+            ?>
+            </p>
+
             <p><strong>Format :</strong> 
             <?php
             $format = SCF::get('format'); 
@@ -50,7 +57,7 @@ if ($post_id && get_post($post_id)) {
 
             <p><strong>Année :</strong> 
             <?php
-            $annee = SCF::get('Année'); 
+            $annee = SCF::get('annee'); 
             echo !empty($annee) ? esc_html($annee) : 'Non spécifié';
             ?>
             </p>
@@ -69,16 +76,20 @@ if ($post_id && get_post($post_id)) {
        
 </div>
 
-<div class="line-above1"></div>
     <div class="contact">
         <p>Cette photo vous intéresse ?</p>
         <button id="open-modal">Contact</button>
         <?php get_template_part('template_parts/contact-modal'); ?>
+
+        <!-- Liens de navigation -->
+        <div class="photo-navigation">
+            <a href="#" class="prev-photo" data-photo-id="prev"><span class="nav-tooltip">←</span></a>
+            <a href="#" class="next-photo" data-photo-id="next"><span class="nav-tooltip">→</span></a>
+        </div>
     </div>
 </div>
 
 <!-- Photos apparentées -->
-<div class="line-above2"></div>
 <div class="related-photos-container">
             <h2>Vous aimerez aussi</h2>
             <div class="related-photos">
