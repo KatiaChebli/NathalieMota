@@ -66,7 +66,7 @@ function filter_photos() {
     // Filtre par catégorie
     if (!empty($_GET['category'])) {
         $args['tax_query'][] = array(
-            'taxonomy' => 'catégories',
+            'taxonomy' => 'Catégories',
             'field'    => 'slug',
             'terms'    => sanitize_text_field($_GET['category']),
         );
@@ -97,7 +97,7 @@ function filter_photos() {
     }
     if ($order_by === 'annee-desc') {
         $args['meta_query'][] = array(
-            'key'     => 'annees',
+            'key'     => 'annee',
             'type'    => 'NUMERIC',
             'compare' => 'EXISTS',
         );
