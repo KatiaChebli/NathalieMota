@@ -87,7 +87,7 @@ if ($post_id && get_post($post_id)) {
             <a href="#" class="next-photo" data-photo-id="next"><span class="nav-tooltip">→</span></a>
         </div>
     </div>
-</div>
+
 
 <!-- Photos apparentées -->
 <div class="related-photos-container">
