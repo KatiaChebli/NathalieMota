@@ -91,9 +91,9 @@ if ($post_id && get_post($post_id)) {
 
 <!-- Photos apparentées -->
 <div class="related-photos-container">
-            <h2>Vous aimerez aussi</h2>
-            <div class="related-photos">
-            <?php
+        <h2>Vous aimerez aussi</h2>
+        <div class="related-photos">
+        <?php
         $current_post_id = get_the_ID(); // ID de l'article actuel
         $args = array(
             'post_type'      => 'Photos', // Type de contenu 
