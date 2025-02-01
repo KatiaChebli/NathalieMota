@@ -90,3 +90,52 @@ document.getElementById('load-more').addEventListener('click', function () {
 });
 
 
+// Etape5 lightbox
+class Lightbox { /*création d'une class qui s'apl init pour initialiser la lightbox*/
+    static init () {
+        const links = document.querySelectorAll('a[href$=".png"], a[href$=".jpg"], a[href$=".jpeg"] ') /*je séléctionne tt les liens qui mène à des img*/
+            .forEach(link => link.addEventListener('click', e => 
+            {
+                e.preventDefault()
+                new Lightbox(e.currentTarget.getAttribute('href')
+                )
+            }))
+    }
+
+    /**
+     * 
+     * @param {string} url url de l'image
+     */
+    constructor(url) {
+         const element = this.builDom(url)
+         document.body.appendChild(element)
+    }
+
+    /**
+     * @param {string} url url de l'image
+     * @return {HTMLElement} 
+     */
+    buildDom(url) {
+        const dom = document.createElement('div')
+        dom.classList.add('lightbox')
+        dom.innerHTML = `<button class="lightbox__close">Fermer</button>
+    <button class="lightbox__next">Suivant</button>
+    <button class="lightbox__prev">Précédent</button>
+        <div class="lightbox__container">
+            <img src="${url}" alt="">
+        </div>`
+        return dom
+    }
+}
+
+/**
+ * <div class="lightbox">
+    <button class="lightbox__close">Fermer</button>
+    <button class="lightbox__next">Suivant</button>
+    <button class="lightbox__prev">Précédent</button>
+        <div class="lightbox__container">
+            <img src="https://picsum.photos/300/300" alt="">
+        </div>
+</div>
+ */
+Lightbox.init()
