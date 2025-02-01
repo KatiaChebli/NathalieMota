@@ -24,9 +24,8 @@ if ($post_id && get_post($post_id)) {
 <div class="photo-container">
             <!-- Colonne gauche -->
     <div class="photo-details">
-    <div class="photo-reference">
-
-    <h1 class="photo-title"> <?php echo get_the_title(); ?></h1>
+        <div class="photo-reference">
+        <h1 class="photo-title"> <?php echo get_the_title(); ?></h1>
             <p><strong>Référence :</strong> 
             <?php
             $reference = SCF::get('reference'); 
@@ -36,14 +35,14 @@ if ($post_id && get_post($post_id)) {
 
             <p><strong>Catégorie :</strong> 
             <?php
-            $reference = SCF::get('categorie'); 
+            $reference = SCF::get('Catégories'); 
             echo !empty($categorie) ? esc_html($categorie) : 'Non spécifié';
             ?>
             </p>
 
             <p><strong>Format :</strong> 
             <?php
-            $format = SCF::get('format'); 
+            $format = SCF::get('Formats'); 
             echo !empty($format) ? esc_html($format) : 'Non spécifié';
             ?>
             </p>
@@ -76,9 +75,9 @@ if ($post_id && get_post($post_id)) {
        
 </div>
 
-    <div class="contact">
-        <p>Cette photo vous intéresse ?</p>
-        <button id="open-modal">Contact</button>
+    <div class="contact-wrapper">
+        <p class="contact-texte">Cette photo vous intéresse ?</p>
+        <button id="open-modal" class="contact-button">Contact</button>
         <?php get_template_part('template_parts/contact-modal'); ?>
 
         <!-- Liens de navigation -->
@@ -93,7 +92,7 @@ if ($post_id && get_post($post_id)) {
 <div class="related-photos-container">
         <h2>Vous aimerez aussi</h2>
         <div class="related-photos">
-        <?php
+            <?php
         $current_post_id = get_the_ID(); // ID de l'article actuel
         $args = array(
             'post_type'      => 'Photos', // Type de contenu 

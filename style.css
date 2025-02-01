@@ -232,7 +232,7 @@ font-style: italic;
 .photo-details {
     display: flex;
     justify-content: space-around; /* Espace entre les deux blocs */
-    align-items: flex-start; /* Aligne les éléments en haut */
+    align-items: flex-end; /* Aligne les éléments en haut */
     /* gap: 20px; Espace entre les deux blocs */
 }
 
@@ -243,7 +243,7 @@ font-style: italic;
 }
 
 
-.photo-reference {
+.photo-reference  {
     flex: 1; /* Permet aux références de prendre également l'espace nécessaire */
     width: 40%;
     margin-top: auto;
@@ -257,17 +257,18 @@ font-style: italic;
     font-size: 66px;
     font-style: italic;
     font-weight:400px;
-
 }
 
-.contact {
+.contact-wrapper {
     display: flex; /* Active le mode flexbox */
     align-items: center ; /* Centre verticalement les éléments */
-    gap: 20%; /* Espace entre le <p> et le bouton/modal */
+    justify-content: flex-start;
+    gap: 15%; /* Espace entre le <p> et le bouton/modal */
+    margin-top: 20px;
     border-bottom: 1px solid black;
 }
 
-.contact p {
+.contact-text {
     margin-top: 30px; /* Enlève les marges par défaut */
     font-family: Poppins;
     font-size: 14px;
@@ -276,7 +277,21 @@ font-style: italic;
 
 }
 
-/* Conteneur principal */
+#open-modal {
+    width: 20%;
+    height: 40%;
+    padding: 10px 20px; /* Ajuste la taille intérieure */
+    background-color: #d9d9d9; /* Couleur de fond */
+    color: #000; /* Couleur du texte */
+    font-size: 12px; /* Taille de la police */
+    font-family: Space Mono; /* Police de caractères */
+    border: none; /* Retirer les bordures */
+    cursor: pointer; /* Curseur au survol */
+}
+
+.photo-navigation {
+    margin-left: auto;
+}
 .related-photos-container {
     margin-bottom: 70px; 
 } 
@@ -313,7 +328,79 @@ font-style: italic;
     display: block;
 }
 
+/********************* Lightbox **********************/
+.lightbox{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .9);
+    z-index: 10;
+    overflow: auto;
+    animation: lightboxIn .5s;
+}
 
+.lightbox__next,
+.lightbox__prev {
+    border: none;
+    background: url(img/arrow.svg) center center / 100% 100%;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 50%;
+    right: 0;
+    margin-top: -14px;
+    z-index: 11;
+    opacity: .5;
+    text-indent: -3000px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.lightbox__next:hover,
+.lightbox__prev:hover {
+    opacity: 1;
+}
+
+.lightbox__prev {
+    right: auto;
+    left: 0;
+    transform: rotate(180deg);
+}
+
+.lightbox__close {
+    height: 20px;
+    width: 20px;
+    background: url(img/cross.svg) center center / 100% 100% ;
+    border: none;
+    position: relative;
+    text-indent: -3000px;
+    top: 0px;
+    right: -90%; 
+    opacity: .5; 
+    cursor: pointer;
+    z-index: 12;
+}
+.lightbox__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px;
+    margin-right: 50px;
+    min-height: 100vh;
+}
+.lightbox__container img {
+    max-width: 100%;
+    height: auto;
+    animation: lightboxIn .5s;
+}
+
+/*animation lightbox*/
+@keyframes lightboxIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
 /********************* FOOTER **********************/
 
 .footer-line {
