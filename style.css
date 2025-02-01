@@ -228,12 +228,12 @@ font-style: italic;
 }
 
 /********************* Affichage Single Photo *********************/
-
 .photo-details {
     display: flex;
     justify-content: space-around; /* Espace entre les deux blocs */
     align-items: flex-end; /* Aligne les éléments en haut */
-    /* gap: 20px; Espace entre les deux blocs */
+    flex: 1;
+    /*gap: 20px; Espace entre les deux blocs */
 }
 
 .photo-image {
@@ -242,16 +242,19 @@ font-style: italic;
     justify-content: center;
 }
 
+.photo-reference{
+border-bottom: 1px solid black;
+}
 
-.photo-reference  {
+.photo-reference p  {
     flex: 1; /* Permet aux références de prendre également l'espace nécessaire */
-    width: 40%;
+    width: 50%;
     margin-top: auto;
     font-family: Space Mono;
     font-size: 14px;
     font-weight: 400px;
-    border-bottom: 1px solid black;
 }
+
 .photo-title{
     font-family: Space Mono;
     font-size: 66px;
@@ -274,7 +277,6 @@ font-style: italic;
     font-size: 14px;
     font-weight: 300px;
     margin-bottom: 30px;
-
 }
 
 #open-modal {
@@ -292,9 +294,11 @@ font-style: italic;
 .photo-navigation {
     margin-left: auto;
 }
+
 .related-photos-container {
     margin-bottom: 70px; 
 } 
+
 .related-photos-container h2{
     font-family: Space Mono;
     font-size: 18px;
