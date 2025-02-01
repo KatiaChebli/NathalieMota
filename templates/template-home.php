@@ -67,7 +67,7 @@ get_header();
                 <?php the_post_thumbnail(); ?>
                 <!-- <h3><?php echo get_the_ID(); ?></h3> -->
             </div>
-            </a>
+        </a>
             <?php
         endwhile;
         wp_reset_postdata();
@@ -77,14 +77,14 @@ get_header();
     ?>
 </div>
 
-<div class="lightbox"></div>
+<!-- <div class="lightbox">
     <button class="lightbox__close">Fermer</button>
     <button class="lightbox__next">Suivant</button>
     <button class="lightbox__prev">Précédent</button>
         <div class="lightbox__container">
-            <img src="https://picsum.photos/900/1800" alt="">
+            <img src="https://picsum.photos/300/1800" alt="">
         </div>
-
+</div> -->
 
 <!-- Bouton Charger plus -->
 <button id="load-more" data-page="1">Charger plus</button>
