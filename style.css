@@ -292,8 +292,48 @@ border-bottom: 1px solid black;
     cursor: pointer; /* Curseur au survol */
 }
 
+/********************** photo preview ***********************/
 .photo-navigation {
     margin-left: auto;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+/* Style des boutons Précédente / Suivante */
+.nav-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+.nav-link:hover {
+    color: #b3b3b3;
+}
+/* miniature */
+.photo-preview {
+    width: 100px;
+    height: 100px;
+    background-color: red !important; /* TEST : Si la miniature ne s'affiche pas, tu verras un carré rouge */
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid black;
+    z-index: 1000;
+}
+
+/* Afficher la miniature */
+.nav-container:hover .photo-preview {
+    opacity: 1;
 }
 
 .related-photos-container {

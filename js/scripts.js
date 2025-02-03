@@ -2,73 +2,79 @@
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('contact-modal');
     const closeModalBtn = document.querySelector('.close-modal');
-    const contactLink = document.querySelector('.contact-link'); // Sélectionne le bouton Contact
-    const singlePhotoContactBtn = document.querySelector('.single-photo-contact'); // Bouton Contact de la single page
+    const contactBtns = document.querySelectorAll('.single-photo-contact'); // Boutons Contact de la single-page
+    const headerContactBtn = document.querySelector('.contact-link'); // Bouton Contact du menu
+    const refPhotoField = document.querySelector('input[name="ref-photo"]'); // Champ référence photo dans le formulaire
 
-    if (!modal || !contactLink || !closeModalBtn) {
-        console.error("Un élément de la modale est manquant.");
+    if (!modal || !closeModalBtn || !refPhotoField) {
+        console.error("Un élément nécessaire pour la modale ou le formulaire est manquant.");
         return;
     }
 
-// Fonction pour ouvrir la modale
-function openModal(event) {
-    event.preventDefault();
-    modal.classList.remove('hidden');
-    }
-    
-// Écouter le clic sur le bouton Contact du menu
-    if (contactLink) {
-        contactLink.addEventListener('click', openModal);
-    }
-    
-// Écouter le clic sur le bouton Contact de la single photo
-    if (singlePhotoContactBtn) {
-        singlePhotoContactBtn.addEventListener('click', openModal);
-    }
+    // Fonction pour ouvrir la modale et insérer la référence uniquement depuis la single-page
+    contactBtns.forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            event.preventDefault();
+            modal.classList.remove('hidden'); // Affiche la modale
 
-// Fermer la modale au clic sur le bouton de fermeture
-closeModalBtn.addEventListener('click', () => {
-    modal.classList.add('hidden');
+            // Ajouter la référence SEULEMENT si on clique depuis la single-page
+            const refPhoto = btn.getAttribute('data-ref-photo');
+            if (refPhoto) {
+                refPhotoField.value = refPhoto; // Pré-remplit le champ du formulaire
+            }
+        });
     });
 
-// Fermer la modale en cliquant en dehors du contenu
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.classList.add('hidden');
+    // Écouter le clic sur le bouton Contact du menu (ne doit pas pré-remplir la référence)
+    if (headerContactBtn) {
+        headerContactBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            modal.classList.remove('hidden'); // Affiche la modale
+
+            // On vide la référence photo si l'utilisateur vient du menu
+            refPhotoField.value = "";
+        });
     }
+
+    // Fermer la modale au clic sur la croix
+    closeModalBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    // Fermer la modale en cliquant en dehors
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
 });
-});
+
 
 // affichage photo preview
+// 
 document.addEventListener('DOMContentLoaded', () => {
-    const photoPreview = document.getElementById('photo-preview');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navContainers = document.querySelectorAll('.nav-container');
 
-    if (!photoPreview || navLinks.length === 0) return;
+    if (navContainers.length === 0) return;
 
-    navLinks.forEach(link => {
-        link.addEventListener('mouseenter', (e) => {
-            const thumbnail = e.target.getAttribute('data-thumbnail');
+    navContainers.forEach(container => {
+        const link = container.querySelector('.nav-link');
+        const preview = container.querySelector('.photo-preview');
+
+        link.addEventListener('mouseenter', () => {
+            const thumbnail = link.getAttribute('data-thumbnail');
             if (thumbnail) {
-                photoPreview.style.backgroundImage = `url(${thumbnail})`;
-                photoPreview.classList.remove('hidden');
-
-                // Positionner la miniature près du lien
-                photoPreview.style.top = `${e.clientY + 10}px`;
-                photoPreview.style.left = `${e.clientX + 10}px`;
+                preview.style.backgroundImage = `url(${thumbnail})`;
+                preview.classList.remove('hidden'); // Afficher l'image
             }
         });
 
-        link.addEventListener('mousemove', (e) => {
-            photoPreview.style.top = `${e.clientY + 10}px`;
-            photoPreview.style.left = `${e.clientX + 10}px`;
-        });
-
         link.addEventListener('mouseleave', () => {
-            photoPreview.classList.add('hidden');
+            preview.classList.add('hidden'); // Cacher l'image
         });
     });
 });
+
 
 
 

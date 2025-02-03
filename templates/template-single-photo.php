@@ -78,36 +78,41 @@ if ($post_id && get_post($post_id)) {
 
 <div class="contact-wrapper">
     <p class="contact-texte">Cette photo vous intéresse ?</p>
-    <button class="contact-button single-photo-contact">Contact</button>
+    <button class="contact-button single-photo-contact" 
+    data-ref-photo="<?php echo esc_attr(SCF::get('reference')); ?>">Contact</button> 
+    <!-- data-ref-photo="XXX" qui contient la ref -->
     <?php get_template_part('template_parts/contact-modal'); ?>
 
-    <!-- Liens de navigation dans la même div -->
-    <div class="photo-navigation">
+     <!-- Liens de navigation -->
+     <div class="photo-navigation">
         <?php
-        // Récupérer la photo précédente et suivante selon la date de prise de vue
         $prev_post = get_previous_post();
         $next_post = get_next_post();
         ?>
 
         <?php if ($prev_post) : ?>
-            <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-link prev-photo"
-                data-thumbnail="<?php echo get_the_post_thumbnail_url($prev_post->ID, 'thumbnail'); ?>">
-                ← Précédente
-            </a>
+            <div class="nav-container">
+                <a href="<?php echo get_permalink($prev_post->ID); ?>" 
+                   class="nav-link prev-photo"
+                   data-thumbnail="<?php echo get_the_post_thumbnail_url($prev_post->ID, 'thumbnail'); ?>">
+                    ← Précédente
+                </a>
+                <div class="photo-preview hidden"></div> <!-- Miniature intégrée -->
+            </div>
         <?php endif; ?>
 
         <?php if ($next_post) : ?>
-            <a href="<?php echo get_permalink($next_post->ID); ?>" class="nav-link next-photo"
-                data-thumbnail="<?php echo get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>">
-                Suivante →
-            </a>
+            <div class="nav-container">
+                <a href="<?php echo get_permalink($next_post->ID); ?>" 
+                   class="nav-link next-photo"
+                   data-thumbnail="<?php echo get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>">
+                    Suivante →
+                </a>
+                <div class="photo-preview hidden"></div> <!-- Miniature intégrée -->
+            </div>
         <?php endif; ?>
-
-        <!-- Miniature qui apparaîtra au survol -->
-        <div id="photo-preview" class="hidden"></div>
     </div>
 </div>
-
 
 
 <!-- Photos apparentées -->
