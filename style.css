@@ -102,7 +102,7 @@ Text Domain: nathaliemota
     cursor: pointer;
 }
 
-/*FORMULAIRE*/
+/*FORMULAIRE modal contact*/
 
 .wpcf7-form  { /*tt le formulaire*/
     display: flex;
@@ -311,8 +311,8 @@ border-bottom: 1px solid black;
 .nav-link {
     text-decoration: none;
     color: #000;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 40px;
+    /*font-weight: bold;*/
     transition: color 0.3s ease;
 }
 .nav-link:hover {
@@ -322,7 +322,6 @@ border-bottom: 1px solid black;
 .photo-preview {
     width: 100px;
     height: 100px;
-    background-color: red !important; /* TEST : Si la miniature ne s'affiche pas, tu verras un carré rouge */
     position: absolute;
     bottom: 100%;
     left: 50%;

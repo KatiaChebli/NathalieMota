@@ -95,7 +95,7 @@ if ($post_id && get_post($post_id)) {
                 <a href="<?php echo get_permalink($prev_post->ID); ?>" 
                    class="nav-link prev-photo"
                    data-thumbnail="<?php echo get_the_post_thumbnail_url($prev_post->ID, 'thumbnail'); ?>">
-                    ← Précédente
+                    ← 
                 </a>
                 <div class="photo-preview hidden"></div> <!-- Miniature intégrée -->
             </div>
@@ -106,7 +106,7 @@ if ($post_id && get_post($post_id)) {
                 <a href="<?php echo get_permalink($next_post->ID); ?>" 
                    class="nav-link next-photo"
                    data-thumbnail="<?php echo get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>">
-                    Suivante →
+                    →
                 </a>
                 <div class="photo-preview hidden"></div> <!-- Miniature intégrée -->
             </div>
