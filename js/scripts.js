@@ -2,17 +2,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('contact-modal');
     const closeModalBtn = document.querySelector('.close-modal');
-    const contactLink = document.querySelector('.menu-item-68');
-    console.log("contactLink")
-    contactLink.classList.add('open-contact-modal')
-    const openModalBtn = document.querySelector('.open-contact-modal');
+    const contactLink = document.querySelector('.contact-link'); // Sélectionne le bouton Contact
 
-    // // Ouvrir la modale
-    openModalBtn.addEventListener('click', () => {
-    modal.classList.remove('hidden');
+    if (!modal || !contactLink || !closeModalBtn) {
+        console.error("Un élément de la modale est manquant.");
+        return;
+    }
+
+    // Empêche la redirection et ouvre la modale
+    contactLink.addEventListener('click', (event) => {
+        event.preventDefault(); // Empêche la redirection
+        modal.classList.remove('hidden'); // Affiche la modale
     });
 
-    // Fermer la modale
+    // Fermer la modale au clic sur le bouton de fermeture
     closeModalBtn.addEventListener('click', () => {
         modal.classList.add('hidden');
     });
@@ -24,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 
 // ETAPE 4 filtres Ajax

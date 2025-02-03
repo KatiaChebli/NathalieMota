@@ -16,6 +16,16 @@ function nathaliemota_register_menus() {
             'primary' => __( 'Menu Principal', 'nathaliemota' ),
         )
     );
+function add_contact_menu_item($items, $args) {
+        if ($args->theme_location == 'primary') { // Vérifie si c'est le menu principal
+            $items .= '<li id="menu-item-68" class="menu-item">
+                        <a href="#" class="contact-link">Contact</a>
+                      </li>';
+        }
+        return $items;
+    }
+add_filter('wp_nav_menu_items', 'add_contact_menu_item', 10, 2);
+    
 }
 add_action('after_setup_theme', 'nathaliemota_register_menus');
 
