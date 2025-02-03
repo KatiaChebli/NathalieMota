@@ -3,30 +3,73 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('contact-modal');
     const closeModalBtn = document.querySelector('.close-modal');
     const contactLink = document.querySelector('.contact-link'); // Sélectionne le bouton Contact
+    const singlePhotoContactBtn = document.querySelector('.single-photo-contact'); // Bouton Contact de la single page
 
     if (!modal || !contactLink || !closeModalBtn) {
         console.error("Un élément de la modale est manquant.");
         return;
     }
 
-    // Empêche la redirection et ouvre la modale
-    contactLink.addEventListener('click', (event) => {
-        event.preventDefault(); // Empêche la redirection
-        modal.classList.remove('hidden'); // Affiche la modale
+// Fonction pour ouvrir la modale
+function openModal(event) {
+    event.preventDefault();
+    modal.classList.remove('hidden');
+    }
+    
+// Écouter le clic sur le bouton Contact du menu
+    if (contactLink) {
+        contactLink.addEventListener('click', openModal);
+    }
+    
+// Écouter le clic sur le bouton Contact de la single photo
+    if (singlePhotoContactBtn) {
+        singlePhotoContactBtn.addEventListener('click', openModal);
+    }
+
+// Fermer la modale au clic sur le bouton de fermeture
+closeModalBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
     });
 
-    // Fermer la modale au clic sur le bouton de fermeture
-    closeModalBtn.addEventListener('click', () => {
+// Fermer la modale en cliquant en dehors du contenu
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
         modal.classList.add('hidden');
-    });
+    }
+});
+});
 
-    // Fermer la modale en cliquant en dehors du contenu
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.add('hidden');
-        }
+// affichage photo preview
+document.addEventListener('DOMContentLoaded', () => {
+    const photoPreview = document.getElementById('photo-preview');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    if (!photoPreview || navLinks.length === 0) return;
+
+    navLinks.forEach(link => {
+        link.addEventListener('mouseenter', (e) => {
+            const thumbnail = e.target.getAttribute('data-thumbnail');
+            if (thumbnail) {
+                photoPreview.style.backgroundImage = `url(${thumbnail})`;
+                photoPreview.classList.remove('hidden');
+
+                // Positionner la miniature près du lien
+                photoPreview.style.top = `${e.clientY + 10}px`;
+                photoPreview.style.left = `${e.clientX + 10}px`;
+            }
+        });
+
+        link.addEventListener('mousemove', (e) => {
+            photoPreview.style.top = `${e.clientY + 10}px`;
+            photoPreview.style.left = `${e.clientX + 10}px`;
+        });
+
+        link.addEventListener('mouseleave', () => {
+            photoPreview.classList.add('hidden');
+        });
     });
 });
+
 
 
 

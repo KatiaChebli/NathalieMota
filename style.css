@@ -42,6 +42,7 @@ Text Domain: nathaliemota
     color: #000; /* Noir */
     font-weight: normal;
     transition: color 0.3s ease;
+    text-transform: uppercase;
 }
 
 .site-header .main-navigation .nav-menu a:hover {
@@ -279,7 +280,7 @@ border-bottom: 1px solid black;
     margin-bottom: 30px;
 }
 
-#open-modal {
+.single-photo-contact {
     width: 20%;
     height: 40%;
     padding: 10px 20px; /* Ajuste la taille intérieure */

@@ -76,17 +76,38 @@ if ($post_id && get_post($post_id)) {
        
 </div>
 
-    <div class="contact-wrapper">
-        <p class="contact-texte">Cette photo vous intéresse ?</p>
-        <button id="open-modal" class="contact-button">Contact</button>
-        <?php get_template_part('template_parts/contact-modal'); ?>
+<div class="contact-wrapper">
+    <p class="contact-texte">Cette photo vous intéresse ?</p>
+    <button class="contact-button single-photo-contact">Contact</button>
+    <?php get_template_part('template_parts/contact-modal'); ?>
 
-        <!-- Liens de navigation -->
-        <div class="photo-navigation">
-            <a href="#" class="prev-photo" data-photo-id="prev"><span class="nav-tooltip">←</span></a>
-            <a href="#" class="next-photo" data-photo-id="next"><span class="nav-tooltip">→</span></a>
-        </div>
+    <!-- Liens de navigation dans la même div -->
+    <div class="photo-navigation">
+        <?php
+        // Récupérer la photo précédente et suivante selon la date de prise de vue
+        $prev_post = get_previous_post();
+        $next_post = get_next_post();
+        ?>
+
+        <?php if ($prev_post) : ?>
+            <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-link prev-photo"
+                data-thumbnail="<?php echo get_the_post_thumbnail_url($prev_post->ID, 'thumbnail'); ?>">
+                ← Précédente
+            </a>
+        <?php endif; ?>
+
+        <?php if ($next_post) : ?>
+            <a href="<?php echo get_permalink($next_post->ID); ?>" class="nav-link next-photo"
+                data-thumbnail="<?php echo get_the_post_thumbnail_url($next_post->ID, 'thumbnail'); ?>">
+                Suivante →
+            </a>
+        <?php endif; ?>
+
+        <!-- Miniature qui apparaîtra au survol -->
+        <div id="photo-preview" class="hidden"></div>
     </div>
+</div>
+
 
 
 <!-- Photos apparentées -->
