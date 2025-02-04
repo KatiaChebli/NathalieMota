@@ -176,12 +176,26 @@ font-style: italic;
     justify-content: space-between; /* Séparer les filtres */
     align-items: center;
     gap: 15px; /* Espacement entre les filtres */
-    margin-bottom: 20px; /* Espacement en dessous des filtres */
+    margin-bottom: 30px; /* Espacement en dessous des filtres */
     margin-top: 60px;
-    margin-left: 50px;
-    margin-right: 50px;
-    padding: 10px;
+    padding-left: 68px;
+    padding-right: 68px;
+    /* margin-left: 50px;
+    margin-right: 50px; */
+    /* padding: 10px; */
 }
+.filter-group {
+    display: flex;
+    gap: 30px;
+    /* padding-left: 50px; */
+}
+.filter-group select {
+    width: 250px;
+    height: auto;
+}
+/* .order-group {
+    margin-left: auto;
+} */
 
 #photo-filters select,
 #photo-filters input,
@@ -201,23 +215,25 @@ font-style: italic;
     transition: background 0.3s ease;
 }
 
-/****Affichage des photo *****/
+/****Affichage des photo home page *****/
 #photo-results {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
     gap: 15px; /* Espacement entre les éléments */
-    padding: 50px; /* Espacement autour du conteneur */
-    
+    padding: 0; /* Espacement autour du conteneur */
+    margin: 0 auto;
+    width: 90%;   
 }
 
 .photo-item {
     overflow: hidden; /* Gérer le contenu qui dépasse */
     width: 100%; /* Réduit la largeur de chaque photo */
-    max-width: 80%; /* Taille maximale réduite */
+    max-width: 98%; /* Taille maximale réduite */
     aspect-ratio: 1 / 1; /*force un carée*/
     overflow: hidden;
     position: relative;
     margin: 0 auto; /* Centre les items */
+    padding: 0;
 }
 
 .photo-item img {
@@ -226,6 +242,7 @@ font-style: italic;
     object-fit: cover;
     display: block;
     margin: 0;
+    padding: 0;
 }
 
 /********************* Affichage Single Photo *********************/
@@ -234,6 +251,7 @@ font-style: italic;
     justify-content: space-around; /* Espace entre les deux blocs */
     align-items: flex-end; /* Aligne les éléments en haut */
     flex: 1;
+    max-width: 1200px;
     /*gap: 20px; Espace entre les deux blocs */
 }
 
@@ -268,7 +286,8 @@ border-bottom: 1px solid black;
     align-items: center ; /* Centre verticalement les éléments */
     justify-content: flex-start;
     gap: 15%; /* Espace entre le <p> et le bouton/modal */
-    margin-top: 20px;
+    margin-top: 30px;
+    padding-bottom: 30px;
     border-bottom: 1px solid black;
 }
 
@@ -334,6 +353,7 @@ border-bottom: 1px solid black;
 .nav-container:hover .photo-preview {
     opacity: 1;
 }
+/********************** FIN photo preview ***********************/
 
 .related-photos-container {
     margin-bottom: 70px; 

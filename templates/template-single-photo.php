@@ -36,15 +36,19 @@ if ($post_id && get_post($post_id)) {
 
             <p><strong>Catégorie :</strong> 
             <?php
-            $reference = SCF::get('Catégories'); 
-            echo !empty($categorie) ? esc_html($categorie) : 'Non spécifié';
+            $terms = get_the_terms( get_the_ID(), 'categorie' );
+            foreach ( $terms as $term ) {
+                echo '<span class="taxo-categorie">' . esc_html( $term->name ) . '</span>';
+            }
             ?>
             </p>
 
             <p><strong>Format :</strong> 
             <?php
-            $format = SCF::get('Formats'); 
-            echo !empty($format) ? esc_html($format) : 'Non spécifié';
+            $termsFormat = get_the_terms( get_the_ID(), 'format' );
+            foreach ( $termsFormat as $term ) {
+                echo '<span class="taxo-format">' . esc_html( $term->name ) . '</span>';
+            }
             ?>
             </p>
 

@@ -12,11 +12,13 @@ get_header();
 <!-- affichage des filtres -->
 <form id="photo-filters">
 
+<!-- groupe des filtres de gauche-->
+    <div class="filter-group">
   <!-- Filtre Catégories -->
   <select name="category" id="category">
         <option value="">CATÉGORIES</option>
         <?php
-        $categories = get_terms(array('taxonomy' => 'Catégories', 'hide_empty' => false));
+        $categories = get_terms(array('taxonomy' => 'categories', 'hide_empty' => false));
         foreach ($categories as $category) {
             echo '<option value="category-' . $category->slug . '">' . $category->name . '</option>';
         }
@@ -27,14 +29,16 @@ get_header();
     <select name="format" id="format">
         <option value="">FORMATS</option>
         <?php
-        $formats = get_terms(array('taxonomy' => 'Formats', 'hide_empty' => false));
+        $formats = get_terms(array('taxonomy' => 'format', 'hide_empty' => false));
         foreach ($formats as $format) {
             echo '<option value="Formats-' . $format->slug . '">' . $format->name . '</option>';
         }
         ?>
     </select>
+    </div>
 
   <!-- Filtre Trier par -->
+   <div class="order-group">
   <select name="order_by" id="order_by">
         <option value="">Trier par</option>
         <option value="annee-asc">Année : Croissant</option>
@@ -44,6 +48,7 @@ get_header();
         <option value="type-asc">Type : Croissant</option>
         <option value="type-desc">Type : Décroissant</option>
     </select>
+    </div>
 
 </form>
 

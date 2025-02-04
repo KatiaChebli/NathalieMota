@@ -50,8 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// affichage photo preview
-// 
+//photo preview single-page
 document.addEventListener('DOMContentLoaded', () => {
     const navContainers = document.querySelectorAll('.nav-container');
 
@@ -74,8 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-
 
 
 
@@ -104,7 +101,7 @@ document.getElementById('photo-filters').addEventListener('submit', function (e)
 });
 
 
-//ETAPE 4 affichage des photos
+//ETAPE 4 affichage des photos home page 
 document.getElementById('photo-filters').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -121,7 +118,9 @@ document.getElementById('photo-filters').addEventListener('submit', function (e)
         .catch(error => console.error('Erreur:', error));
 });
 
-// bouton charger plus photos
+
+
+// bouton charger plus photos home page
 document.getElementById('load-more').addEventListener('click', function () {
     const button = this;
     const page = button.getAttribute('data-page'); // Page actuelle

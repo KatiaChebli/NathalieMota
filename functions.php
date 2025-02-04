@@ -64,7 +64,6 @@ function get_random_hero_image() {
 
 
 //Etape4 Ajax photo homepage
-
 function filter_photos() {
     $args = array(
         'post_type'      => 'photos',
@@ -78,7 +77,7 @@ function filter_photos() {
         $args['tax_query'][] = array(
             'taxonomy' => 'Catégories',
             'field'    => 'slug',
-            'terms'    => sanitize_text_field($_GET['category']),
+            'terms'    => sanitize_text_field($_GET['Catégories']),
         );
     }
 
@@ -87,7 +86,7 @@ function filter_photos() {
         $args['tax_query'][] = array(
             'taxonomy' => 'Formats',
             'field'    => 'slug',
-            'terms'    => sanitize_text_field($_GET['format']),
+            'terms'    => sanitize_text_field($_GET['Formats']),
         );
     }
 
