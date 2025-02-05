@@ -18,7 +18,7 @@ get_header();
   <select name="category" id="category">
         <option value="">CATÉGORIES</option>
         <?php
-        $categories = get_terms(array('taxonomy' => 'categories', 'hide_empty' => false));
+        $categories = get_terms(array('taxonomy' => 'categorie', 'hide_empty' => false));
         foreach ($categories as $category) {
             echo '<option value="category-' . $category->slug . '">' . $category->name . '</option>';
         }
@@ -57,7 +57,7 @@ get_header();
 <div id="photo-results">
 
     <?php
-    $query = new WP_Query(array('post_type' => 'photos', 'posts_per_page' => 12));
+    $query = new WP_Query(array('post_type' => 'photos', 'posts_per_page' => 8));
     ?>
 
     <?php

@@ -56,28 +56,62 @@ function get_random_hero_image() {
     // Si aucune photo ou image mise en avant, retourner une image par défaut
     return get_template_directory_uri() . '/images/cat(1).png';
 }
-// // fonction ajax
-// function add_ajax_url() {
-//     echo '<script type="text/javascript">var ajaxurl = "' . admin_url('admin-ajax.php') . '";</script>';
-// }
-// add_action('wp_head', 'add_ajax_url');
+
+
+// // fonction ajax bouton charger plus
+function my_enqueue_scripts() {
+    wp_enqueue_script('my-theme-js', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0', true);
+
+    wp_localize_script('my-theme-js', 'ajaxurl', admin_url('admin-ajax.php'));
+}
+add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
+
+
+function load_more_photos() {
+    $paged = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+    $args = array(
+        'post_type'      => 'photos',  // Assure-toi que c'est bien le bon post type
+        'posts_per_page' => 6,         // Nombre de photos à charger à chaque clic
+        'paged'          => $paged,    // Page actuelle
+        'orderby'        => 'date',    // Trie les photos par date
+        'order'          => 'DESC',    // Affiche les plus récentes en premier
+    );
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            echo '<div class="photo-item">' . get_the_post_thumbnail() . '</div>';
+        }
+        wp_reset_postdata();
+    } else {
+        echo ''; // Retourne une réponse vide si plus de photos
+    }
+
+    wp_die();
+}
+
+add_action('wp_ajax_load_more_photos', 'load_more_photos');
+add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
 
 
 //Etape4 Ajax photo homepage
 function filter_photos() {
     $args = array(
         'post_type'      => 'photos',
-        'posts_per_page' => 8,
+        'posts_per_page' => 15,
         'tax_query'      => array('relation' => 'AND'),
         'meta_query'     => array('relation' => 'AND'),
     );
 
     // Filtre par catégorie
-    if (!empty($_GET['category'])) {
+    if (!empty($_GET['categorie'])) {
         $args['tax_query'][] = array(
-            'taxonomy' => 'Catégories',
+            'taxonomy' => 'categorie',
             'field'    => 'slug',
-            'terms'    => sanitize_text_field($_GET['Catégories']),
+            'terms'    => sanitize_text_field($_GET['categorie']),
         );
     }
 

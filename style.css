@@ -201,7 +201,7 @@ font-style: italic;
 #photo-filters input,
 #photo-filters button {
     padding: 10px;
-    font-size: 1rem;
+    font-size: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background: #fff;
@@ -244,6 +244,21 @@ font-style: italic;
     margin: 0;
     padding: 0;
 }
+
+#load-more {
+    display: block; /* S'assure qu'il prend toute la ligne */
+    margin: 20px auto; /* 20px de marge en haut et en bas, auto pour centrer horizontalement */
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 10px 70px; /* Espacement interne */
+    background-color: #D8D8D8; /* Couleur du bouton */
+    color: #000; /* Couleur du texte */
+    border: none; /* Supprime la bordure */
+    font-size: 12px; /* Taille du texte */
+    font-family: Space Mono;
+    cursor: pointer; /* Curseur de type "pointer" */
+}
+
 
 /********************* Affichage Single Photo *********************/
 .photo-details {
