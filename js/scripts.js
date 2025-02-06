@@ -101,22 +101,37 @@ document.getElementById('photo-filters').addEventListener('submit', function (e)
 });
 
 
-//ETAPE 4 affichage des photos home page 
-document.getElementById('photo-filters').addEventListener('submit', function (e) {
-    e.preventDefault();
+//ETAPE 4 affichage des photos home page
+document.addEventListener("DOMContentLoaded", function () {
+    const filters = document.querySelectorAll('#photo-filters select');
 
-    const formData = new FormData(this);
-    const params = new URLSearchParams(formData);
+    filters.forEach(filter => {
+        filter.addEventListener('change', function () {
+            // Récupère les valeurs sélectionnées
+            const category = document.getElementById('category').value;
+            const format = document.getElementById('format').value;
+            const orderBy = document.getElementById('order_by').value;
 
-    fetch(ajaxurl + '?action=filter_photos&' + params.toString(), {
-        method: 'GET',
-    })
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('photo-results').innerHTML = data;
-        })
-        .catch(error => console.error('Erreur:', error));
+            const formData = new FormData();
+            formData.append('action', 'filter_photos');
+            formData.append('category', category);
+            formData.append('format', format);
+            formData.append('order_by', orderBy);
+
+            // Envoie la requête AJAX
+            fetch(ajaxurl, {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('photo-results').innerHTML = data; // Met à jour l'affichage
+            })
+            .catch(error => console.error('Erreur AJAX :', error));
+        });
+    });
 });
+
 
 
 

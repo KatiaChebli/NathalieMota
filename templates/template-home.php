@@ -11,46 +11,44 @@ get_header();
 
 <!-- affichage des filtres -->
 <form id="photo-filters">
-
-<!-- groupe des filtres de gauche-->
     <div class="filter-group">
-  <!-- Filtre Catégories -->
-  <select name="category" id="category">
-        <option value="">CATÉGORIES</option>
-        <?php
-        $categories = get_terms(array('taxonomy' => 'categorie', 'hide_empty' => false));
-        foreach ($categories as $category) {
-            echo '<option value="category-' . $category->slug . '">' . $category->name . '</option>';
-        }
-        ?>
-    </select>
+        <!-- Filtre Catégories -->
+        <select name="category" id="category">
+            <option value="">CATÉGORIES</option>
+            <?php
+            $categories = get_terms(array('taxonomy' => 'categorie', 'hide_empty' => false));
+            foreach ($categories as $category) {
+                echo '<option value="' . $category->slug . '">' . $category->name . '</option>';
+            }
+            ?>
+        </select>
 
-    <!-- Filtre Formats -->
-    <select name="format" id="format">
-        <option value="">FORMATS</option>
-        <?php
-        $formats = get_terms(array('taxonomy' => 'format', 'hide_empty' => false));
-        foreach ($formats as $format) {
-            echo '<option value="Formats-' . $format->slug . '">' . $format->name . '</option>';
-        }
-        ?>
-    </select>
+        <!-- Filtre Formats -->
+        <select name="format" id="format">
+            <option value="">FORMATS</option>
+            <?php
+            $formats = get_terms(array('taxonomy' => 'format', 'hide_empty' => false));
+            foreach ($formats as $format) {
+                echo '<option value="' . $format->slug . '">' . $format->name . '</option>';
+            }
+            ?>
+        </select>
     </div>
 
-  <!-- Filtre Trier par -->
-   <div class="order-group">
-  <select name="order_by" id="order_by">
-        <option value="">Trier par</option>
-        <option value="annee-asc">Année : Croissant</option>
-        <option value="annee-desc">Année : Décroissant</option>
-        <option value="reference-asc">Référence : A-Z</option>
-        <option value="reference-desc">Référence : Z-A</option>
-        <option value="type-asc">Type : Croissant</option>
-        <option value="type-desc">Type : Décroissant</option>
-    </select>
+    <!-- Filtre Trier par -->
+    <div class="order-group">
+        <select name="order_by" id="order_by">
+            <option value="">Trier par</option>
+            <option value="annee-asc">Année : Croissant</option>
+            <option value="annee-desc">Année : Décroissant</option>
+            <option value="reference-asc">Référence : A-Z</option>
+            <option value="reference-desc">Référence : Z-A</option>
+            <option value="type-asc">Type : Croissant</option>
+            <option value="type-desc">Type : Décroissant</option>
+        </select>
     </div>
-
 </form>
+
 
 
 <!-- affichage des photos -->

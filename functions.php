@@ -93,88 +93,92 @@ function load_more_photos() {
 
     wp_die();
 }
-
 add_action('wp_ajax_load_more_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
 
 
 //Etape4 Ajax photo homepage
 function filter_photos() {
+    // Récupération des filtres envoyés par AJAX
+    $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
+    $format = isset($_POST['format']) ? sanitize_text_field($_POST['format']) : '';
+    $order_by = isset($_POST['order_by']) ? sanitize_text_field($_POST['order_by']) : '';
+
     $args = array(
         'post_type'      => 'photos',
-        'posts_per_page' => 15,
+        'posts_per_page' => -1, // Charge toutes les photos filtrées
         'tax_query'      => array('relation' => 'AND'),
         'meta_query'     => array('relation' => 'AND'),
     );
 
-    // Filtre par catégorie
-    if (!empty($_GET['categorie'])) {
+    // Filtrer par catégorie 
+    if (!empty($category)) {
         $args['tax_query'][] = array(
-            'taxonomy' => 'categorie',
+            'taxonomy' => 'categorie', // Assure-toi que c'est le bon nom
             'field'    => 'slug',
-            'terms'    => sanitize_text_field($_GET['categorie']),
+            'terms'    => $category,
         );
     }
 
-    // Filtre par format
-    if (!empty($_GET['format'])) {
+    // Filtrer par format 
+    if (!empty($format)) {
         $args['tax_query'][] = array(
-            'taxonomy' => 'Formats',
+            'taxonomy' => 'format', // Correction du nom
             'field'    => 'slug',
-            'terms'    => sanitize_text_field($_GET['Formats']),
+            'terms'    => $format,
         );
     }
 
- // Trier par
- if (!empty($_GET['order_by'])) {
-    $order_by = sanitize_text_field($_GET['order_by']);
+    // Trier les résultats
+    if (!empty($order_by)) {
+        switch ($order_by) {
+            case 'annee-asc':
+                $args['meta_query'][] = array(
+                    'key'     => 'annee',
+                    'type'    => 'NUMERIC',
+                    'compare' => 'EXISTS',
+                );
+                $args['orderby'] = 'meta_value_num';
+                $args['order'] = 'ASC';
+                break;
 
-    // Trier par Année
-    if ($order_by === 'annee-asc') {
-        $args['meta_query'][] = array(
-            'key'     => 'annee',
-            'type'    => 'NUMERIC',
-            'compare' => 'EXISTS',
-        );
-        $args['orderby'] = 'meta_value_num';
-        $args['order'] = 'ASC';
-    }
-    if ($order_by === 'annee-desc') {
-        $args['meta_query'][] = array(
-            'key'     => 'annee',
-            'type'    => 'NUMERIC',
-            'compare' => 'EXISTS',
-        );
-        $args['orderby'] = 'meta_value_num';
-        $args['order'] = 'DESC';
+            case 'annee-desc':
+                $args['meta_query'][] = array(
+                    'key'     => 'annee',
+                    'type'    => 'NUMERIC',
+                    'compare' => 'EXISTS',
+                );
+                $args['orderby'] = 'meta_value_num';
+                $args['order'] = 'DESC';
+                break;
+
+            case 'reference-asc':
+                $args['meta_key'] = 'reference';
+                $args['orderby'] = 'meta_value';
+                $args['order'] = 'ASC';
+                break;
+
+            case 'reference-desc':
+                $args['meta_key'] = 'reference';
+                $args['orderby'] = 'meta_value';
+                $args['order'] = 'DESC';
+                break;
+
+            case 'type-asc':
+                $args['meta_key'] = 'type';
+                $args['orderby'] = 'meta_value';
+                $args['order'] = 'ASC';
+                break;
+
+            case 'type-desc':
+                $args['meta_key'] = 'type';
+                $args['orderby'] = 'meta_value';
+                $args['order'] = 'DESC';
+                break;
+        }
     }
 
-    // Trier par Référence
-    if ($order_by === 'reference-asc') {
-        $args['meta_key'] = 'reference';
-        $args['orderby'] = 'meta_value';
-        $args['order'] = 'ASC';
-    }
-    if ($order_by === 'reference-desc') {
-        $args['meta_key'] = 'reference';
-        $args['orderby'] = 'meta_value';
-        $args['order'] = 'DESC';
-    }
-
-    // Trier par Type
-    if ($order_by === 'type-asc') {
-        $args['meta_key'] = 'type';
-        $args['orderby'] = 'meta_value';
-        $args['order'] = 'ASC';
-    }
-    if ($order_by === 'type-desc') {
-        $args['meta_key'] = 'type';
-        $args['orderby'] = 'meta_value';
-        $args['order'] = 'DESC';
-    }
-}
-
-    // Requête WP_Query
+    // Exécution de la requête WP_Query
     $query = new WP_Query($args);
 
     if ($query->have_posts()) :
@@ -186,11 +190,12 @@ function filter_photos() {
             </div>
             <?php
         endwhile;
+        wp_reset_postdata();
     else :
         echo '<p>Aucune photo trouvée.</p>';
     endif;
 
-    wp_die(); // Terminer l'exécution pour Ajax
+    wp_die();
 }
 add_action('wp_ajax_filter_photos', 'filter_photos');
 add_action('wp_ajax_nopriv_filter_photos', 'filter_photos');
