@@ -71,11 +71,12 @@ function load_more_photos() {
     $paged = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
     $args = array(
-        'post_type'      => 'photos',  // Assure-toi que c'est bien le bon post type
-        'posts_per_page' => 6,         // Nombre de photos à charger à chaque clic
-        'paged'          => $paged,    // Page actuelle
-        'orderby'        => 'date',    // Trie les photos par date
-        'order'          => 'DESC',    // Affiche les plus récentes en premier
+        'post_type'      => 'photos',
+        'posts_per_page' => $photos_par_page,
+        'paged'          => $paged,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'offset'         => $offset, // Exclut les premières photos
     );
 
     $query = new WP_Query($args);
