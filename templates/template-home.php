@@ -65,12 +65,41 @@ get_header();
         while ($query->have_posts()) : $query->the_post();
         $id= get_the_ID();
         ?>
-        <a href="<?php echo esc_url( $page_url ) . '?postid=' . $id; ?>">
-            <div class="photo-item">
-                <?php the_post_thumbnail(); ?>
-                <!-- <h3><?php echo get_the_ID(); ?></h3> -->
-            </div>
-        </a>
+        
+        <a href="<?php echo esc_url($page_url) . '?postid=' . $id; ?>" class="photo-item">
+    <div class="image-container">
+        <img src="<?php echo get_the_post_thumbnail_url(); ?>" 
+             alt="<?php the_title(); ?>">
+        
+        <!-- Overlay qui apparaît au survol -->
+        <div class="overlay">
+            <h3 class="image-title"><?php the_title(); ?></h3>
+            <p class="image-category">
+                <?php
+                $categories = get_the_terms(get_the_ID(), 'categorie');
+                if ($categories && !is_wp_error($categories)) {
+                    echo $categories[0]->name;
+                }
+                ?>
+            </p>
+            <!-- Bouton "œil" pour la lightbox -->
+            <button type="button" class="view-icon" 
+                    data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
+                    data-title="<?php the_title(); ?>">
+                👁️
+            </button>
+        </div>
+
+        <!-- Icône loupe en haut à droite -->
+        <button type="button" class="zoom-icon" 
+                data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
+                data-title="<?php the_title(); ?>">
+            🔍
+        </button>
+    </div>
+</a>
+
+
             <?php
         endwhile;
         wp_reset_postdata();
@@ -79,15 +108,6 @@ get_header();
     endif;
     ?>
 </div>
-
-<!-- <div class="lightbox">
-    <button class="lightbox__close">Fermer</button>
-    <button class="lightbox__next">Suivant</button>
-    <button class="lightbox__prev">Précédent</button>
-        <div class="lightbox__container">
-            <img src="https://picsum.photos/300/1800" alt="">
-        </div>
-</div> -->
 
 <!-- Bouton Charger plus -->
 <button id="load-more" data-page="1">Charger plus</button>
