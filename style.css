@@ -228,9 +228,8 @@ font-style: italic;
 .photo-item {
     overflow: hidden; /* Gérer le contenu qui dépasse */
     width: 100%; /* Réduit la largeur de chaque photo */
-    max-width: 98%; /* Taille maximale réduite */
+    /*max-width: 98%;  Taille maximale réduite */
     aspect-ratio: 1 / 1; /*force un carée*/
-    overflow: hidden;
     position: relative;
     margin: 0 auto; /* Centre les items */
     padding: 0;
@@ -241,8 +240,6 @@ font-style: italic;
     height: 100%; /* Respecte les proportions */
     object-fit: cover;
     display: block;
-    margin: 0;
-    padding: 0;
 }
 
 #load-more {
@@ -408,78 +405,135 @@ border-bottom: 1px solid black;
 }
 
 /********************* Lightbox **********************/
-.lightbox{
+/* Overlay noir de la lightbox */
+#lightbox-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, .9);
-    z-index: 10;
-    overflow: auto;
-    animation: lightboxIn .5s;
-}
-
-.lightbox__next,
-.lightbox__prev {
-    border: none;
-    background: url(img/arrow.svg) center center / 100% 100%;
-    width: 50px;
-    height: 50px;
-    position: fixed;
-    top: 50%;
-    right: 0;
-    margin-top: -14px;
-    z-index: 11;
-    opacity: .5;
-    text-indent: -3000px;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.lightbox__next:hover,
-.lightbox__prev:hover {
-    opacity: 1;
-}
-
-.lightbox__prev {
-    right: auto;
-    left: 0;
-    transform: rotate(180deg);
-}
-
-.lightbox__close {
-    height: 20px;
-    width: 20px;
-    background: url(img/cross.svg) center center / 100% 100% ;
-    border: none;
-    position: relative;
-    text-indent: -3000px;
-    top: 0px;
-    right: -90%; 
-    opacity: .5; 
-    cursor: pointer;
-    z-index: 12;
-}
-.lightbox__container {
-    display: flex;
-    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
     justify-content: center;
-    margin-left: 50px;
-    margin-right: 50px;
-    min-height: 100vh;
-}
-.lightbox__container img {
-    max-width: 100%;
-    height: auto;
-    animation: lightboxIn .5s;
+    align-items: center;
+    z-index: 1000;
 }
 
-/*animation lightbox*/
-@keyframes lightboxIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+/* Contenu de la lightbox */
+#lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    text-align: center;
 }
+
+/* Image dans la lightbox */
+#lightbox-image {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Bouton pour fermer la lightbox */
+#lightbox-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Conteneur de l'image */
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+}
+
+.image-container:hover img {
+    opacity: 0.5; /* Rend l'image transparente au survol */
+}
+
+/* Positionnement de l'icône zoom */
+.zoom-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+    border: none;
+    border-radius: 50%; /* Cercle */
+    padding: 10px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.zoom-icon:hover {
+    transform: scale(1.2); /* Agrandit l'icône au survol */
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Overlay pour le survol */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Overlay noir semi-transparent */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Masqué par défaut */
+    transition: opacity 0.3s ease;
+}
+
+.photo-item:hover .overlay {
+    opacity: 1; /* Affiche l'overlay au survol */
+}
+
+
+/* Style du titre */
+.image-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+/* Style de la catégorie */
+.image-category {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Bouton œil */
+.view-icon {
+    background: none;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.view-icon:hover {
+    transform: scale(1.2); /* Agrandit l'icône au survol */
+}
+
+
 /********************* FOOTER **********************/
 
 .footer-line {
