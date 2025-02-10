@@ -86,7 +86,7 @@ get_header();
             <button type="button" class="view-icon" 
                     data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
                     data-title="<?php the_title(); ?>">
-                👁️
+                <!-- 👁️ -->
             </button>
         </div>
 
@@ -94,7 +94,7 @@ get_header();
         <button type="button" class="zoom-icon" 
                 data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
                 data-title="<?php the_title(); ?>">
-            🔍
+            <!-- 🔍 -->
         </button>
     </div>
 </a>
