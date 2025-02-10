@@ -67,16 +67,44 @@ function my_enqueue_scripts() {
 add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
 
 
+// function load_more_photos() {
+//     $paged = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+//     $args = array(
+//         'post_type'      => 'photos',
+//         'posts_per_page' => $photos_par_page,
+//         'paged'          => $paged,
+//         'orderby'        => 'date',
+//         'order'          => 'DESC',
+//         'offset'         => $offset, // Exclut les premières photos
+//     );
+
+//     $query = new WP_Query($args);
+
+//     if ($query->have_posts()) {
+//         while ($query->have_posts()) {
+//             $query->the_post();
+//             echo '<div class="photo-item">' . get_the_post_thumbnail() . '</div>';
+//         }
+//         wp_reset_postdata();
+//     } else {
+//         echo ''; // Retourne une réponse vide si plus de photos
+//     }
+
+//     wp_die();
+// }
+// add_action('wp_ajax_load_more_photos', 'load_more_photos');
+// add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
+
 function load_more_photos() {
     $paged = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
     $args = array(
         'post_type'      => 'photos',
-        'posts_per_page' => $photos_par_page,
+        'posts_per_page' => 8, // Nombre de photos à charger
         'paged'          => $paged,
         'orderby'        => 'date',
         'order'          => 'DESC',
-        'offset'         => $offset, // Exclut les premières photos
     );
 
     $query = new WP_Query($args);
@@ -84,7 +112,43 @@ function load_more_photos() {
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
-            echo '<div class="photo-item">' . get_the_post_thumbnail() . '</div>';
+            $id = get_the_ID();
+            $page = get_page_by_path('single-page');
+            $page_url = get_permalink($page->ID);
+            ?>
+            <a href="<?php echo esc_url($page_url) . '?postid=' . $id; ?>" class="photo-item">
+                <div class="image-container">
+                    <img src="<?php echo get_the_post_thumbnail_url(); ?>" 
+                         alt="<?php the_title(); ?>">
+
+                    <!-- Overlay qui apparaît au survol -->
+                    <div class="overlay">
+                        <h3 class="image-title"><?php the_title(); ?></h3>
+                        <p class="image-category">
+                            <?php
+                            $categories = get_the_terms(get_the_ID(), 'categorie');
+                            if ($categories && !is_wp_error($categories)) {
+                                echo $categories[0]->name;
+                            }
+                            ?>
+                        </p>
+                        <!-- Bouton "œil" pour la lightbox -->
+                        <button type="button" class="view-icon" 
+                                data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
+                                data-title="<?php the_title(); ?>">
+                            👁️
+                        </button>
+                    </div>
+
+                    <!-- Icône loupe en haut à droite -->
+                    <button type="button" class="zoom-icon" 
+                            data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
+                            data-title="<?php the_title(); ?>">
+                        🔍
+                    </button>
+                </div>
+            </a>
+            <?php
         }
         wp_reset_postdata();
     } else {
@@ -95,6 +159,7 @@ function load_more_photos() {
 }
 add_action('wp_ajax_load_more_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
+
 
 
 //Etape4 Ajax photo homepage
@@ -199,3 +264,12 @@ function filter_photos() {
 }
 add_action('wp_ajax_filter_photos', 'filter_photos');
 add_action('wp_ajax_nopriv_filter_photos', 'filter_photos');
+
+
+// Etape 5 charge le fichier lightbox
+
+function enqueue_lightbox_scripts() {
+    wp_enqueue_script('lightbox-js', get_template_directory_uri() . '/js/lightbox.js', array('jquery'), null, true);
+    wp_enqueue_style('lightbox-css', get_template_directory_uri() . '/css/lightbox.css');
+}
+add_action('wp_enqueue_scripts', 'enqueue_lightbox_scripts');
