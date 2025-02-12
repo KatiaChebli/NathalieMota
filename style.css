@@ -476,7 +476,7 @@ border-bottom: 1px solid black;
     font-size: 18px;
     cursor: pointer;
     transition: transform 0.3s ease, background 0.3s ease;
-    background-image: url(/img/Icon_fullscreen.png);
+    /* background-image: url(/img/Icon_fullscreen.png); */
 }
 
 .zoom-icon:hover {
@@ -532,14 +532,14 @@ border-bottom: 1px solid black;
 
 /* Bouton œil */
 .view-icon {
-    background-image: url('/img/Group.png') /*no-repeat center*/ !important;
+    background: none;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    background-size: contain; 
+    top: 45%;
+    left: 45%;
+    /* background-size: contain;  */
     padding: 10px;
     color: white;
-    font-size: 20px;
+    font-size: 8px;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
