@@ -58,7 +58,7 @@ function get_random_hero_image() {
 }
 
 
-// // fonction ajax bouton charger plus
+// // Etape 5 fonction ajax bouton charger plus
 function my_enqueue_scripts() {
     wp_enqueue_script('my-theme-js', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0', true);
 
@@ -136,7 +136,9 @@ function load_more_photos() {
                         <button type="button" class="view-icon" 
                                 data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
                                 data-title="<?php the_title(); ?>">
-                            👁️
+                                <img src="<?php echo get_template_directory_uri(); ?>/img/Group.png">
+
+                            <!-- 👁️ -->
                         </button>
                     </div>
 
@@ -144,7 +146,9 @@ function load_more_photos() {
                     <button type="button" class="zoom-icon" 
                             data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
                             data-title="<?php the_title(); ?>">
-                        🔍
+                            <img src="<?php echo get_template_directory_uri(); ?>/img/Icon_fullscreen.png">
+
+                        <!-- 🔍 -->
                     </button>
                 </div>
             </a>
