@@ -418,12 +418,47 @@ border-bottom: 1px solid black;
     z-index: 1000;
 }
 
+#lightbox-overlay.active {
+    display: flex;
+}
 /* Contenu de la lightbox */
 #lightbox-content {
     position: relative;
     max-width: 90%;
     max-height: 90%;
     text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+/* ===== Flèches de navigation ===== */
+#lightbox-prev, #lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    color: white;
+    border: none;
+    font-size: 20px;
+    /* font-weight: 400px; */
+    cursor: pointer;
+    z-index: 1100;
+    padding: 10px 15px;
+    transition: opacity 0.3s ease;
+}
+
+#lightbox-prev:hover, #lightbox-next:hover {
+    opacity: 0.7;
+}
+
+/* Position de la flèche gauche (extérieur de l'image) */
+#lightbox-prev {
+    left: 20px;
+}
+
+/* Position de la flèche droite (extérieur de l'image) */
+#lightbox-next {
+    right: 20px;
 }
 
 /* Image dans la lightbox */
@@ -434,16 +469,35 @@ border-bottom: 1px solid black;
     margin: 0 auto;
 }
 
-/* Bouton pour fermer la lightbox */
+/* ===== Bouton de fermeture ===== */
 #lightbox-close {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     background: none;
-    border: none;
     color: white;
-    font-size: 24px;
+    border: none;
+    font-size: 2rem;
     cursor: pointer;
+    z-index: 1200;
+}
+
+/* ===== Titre sous l'image ===== */
+#lightbox-info {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+#lightbox-category {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-top: 5px; /* Espacement entre le titre et la catégorie */
+    /* Légère transparence pour différencier */
 }
 
 /* Conteneur de l'image */
@@ -472,11 +526,10 @@ border-bottom: 1px solid black;
     border: none;
     border-radius: 50%; /* Cercle */
     padding: 10px;
-    color: white;
+    background: none;
     font-size: 18px;
     cursor: pointer;
     transition: transform 0.3s ease, background 0.3s ease;
-    /* background-image: url(/img/Icon_fullscreen.png); */
 }
 
 .zoom-icon:hover {
@@ -492,7 +545,7 @@ border-bottom: 1px solid black;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6); /* Overlay noir semi-transparent */
-    color: white;
+    /* color: white; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -515,7 +568,6 @@ border-bottom: 1px solid black;
     text-transform: uppercase;
     color: #fff;
     font-size: 12px;
-    font-weight: bold;
     margin: 0;
 }
 
@@ -536,10 +588,7 @@ border-bottom: 1px solid black;
     position: absolute;
     top: 45%;
     left: 45%;
-    /* background-size: contain;  */
-    padding: 10px;
     color: white;
-    font-size: 8px;
     cursor: pointer;
     transition: transform 0.3s ease;
 }

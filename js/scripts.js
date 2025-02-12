@@ -157,7 +157,4 @@ document.getElementById('load-more').addEventListener('click', function () {
 });
 
 
-// Etape5 lightbox
-// 
-
 
