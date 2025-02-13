@@ -148,7 +148,6 @@ if ($post_id && get_post($post_id)) {
                             <?php endif; ?>
                         </a>
                     </div>
-
                 <?php endwhile;
                 wp_reset_postdata(); // Réinitialiser la requête principale
             else : ?>
