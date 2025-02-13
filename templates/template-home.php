@@ -92,15 +92,14 @@ get_header();
         
 
         <!-- Icône loupe en haut à droite -->
+
         <button type="button" class="zoom-icon" 
-                data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
-                data-title="<?php the_title(); ?>">
-                <img src="<?php echo get_template_directory_uri(); ?>/img/Icon_fullscreen.png">
-
-            <!-- 🔍 -->
+        data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
+        data-reference="<?php echo esc_attr($reference); ?>" 
+        data-category="<?php echo esc_attr($category_name); ?>">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/Icon_fullscreen.png">
         </button>
-
-        </div>
+    </div>
     </div>
 </a>
 

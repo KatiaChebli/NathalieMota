@@ -472,8 +472,8 @@ border-bottom: 1px solid black;
 /* ===== Bouton de fermeture ===== */
 #lightbox-close {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 40px;
+    right: 60px;
     background: none;
     color: white;
     border: none;
