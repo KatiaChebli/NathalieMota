@@ -136,26 +136,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // bouton charger plus photos home page
-// document.getElementById('load-more').addEventListener('click', function () {
-//     const button = this;
-//     const page = button.getAttribute('data-page'); // Page actuelle
-//     const nextPage = parseInt(page) + 1; // Page suivante
-
-//     fetch(ajaxurl + '?action=load_more_photos&page=' + nextPage, {
-//         method: 'GET',
-//     })
-//         .then(response => response.text())
-//         .then(data => {
-//             if (data.trim() !== '') {
-//                 document.getElementById('photo-results').innerHTML += data; // Ajoute les nouvelles photos
-//                 button.setAttribute('data-page', nextPage); // Met à jour la page suivante
-//             } else {
-//                 button.style.display = 'none'; // Cache le bouton si plus de photos
-//             }
-//         })
-//         .catch(error => console.error('Erreur :', error));
-// });
-
 document.getElementById('load-more').addEventListener('click', function () {
     const button = this;
     const page = button.getAttribute('data-page'); // Page actuelle
@@ -164,18 +144,19 @@ document.getElementById('load-more').addEventListener('click', function () {
     fetch(ajaxurl + '?action=load_more_photos&page=' + nextPage, {
         method: 'GET',
     })
-        .then(response => response.text())
-        .then(data => {
-            if (data.trim() !== '') {
-                document.getElementById('photo-results').innerHTML += data; // Ajoute les nouvelles photos
-                button.setAttribute('data-page', nextPage); // Met à jour la page suivante
-                
-                attachLightboxEvents(); // 🔥 Réattache les événements pour la lightbox
-            } else {
-                button.style.display = 'none'; // Cache le bouton si plus de photos
-            }
-        })
-        .catch(error => console.error('Erreur :', error));
+    .then(response => response.text())
+    .then(data => {
+        if (data.trim() !== '') {
+            document.getElementById('photo-results').innerHTML += data; // Ajoute les nouvelles photos
+            button.setAttribute('data-page', nextPage); // Met à jour la page suivante
+
+            setTimeout(updateLightboxEvents, 500); // ✅ Attendre avant d'attacher les événements
+        } else {
+            button.style.display = 'none'; // Cache le bouton si plus de photos
+        }
+    })
+    .catch(error => console.error('Erreur :', error));
 });
+
 
 

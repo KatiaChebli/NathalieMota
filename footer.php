@@ -23,8 +23,10 @@
     <button id="lightbox-next">Suivante &rarr;</button>
 
     <div id="lightbox-info">
+        <div class="lightbox-details">
         <h3 id="lightbox-reference"></h3> 
         <p id="lightbox-category"></p> 
+        </div>
     </div>
 </div>
 

@@ -95,8 +95,14 @@ get_header();
 
         <button type="button" class="zoom-icon" 
         data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
-        data-reference="<?php echo esc_attr($reference); ?>" 
-        data-category="<?php echo esc_attr($category_name); ?>">
+        data-reference="<?php 
+        $reference = SCF::get('reference'); 
+        echo !empty($reference) ? esc_html($reference) : 'Non spécifié';
+        ?>"  
+        data-category="<?php 
+        $categories = get_the_terms(get_the_ID(), 'categorie');
+            echo (!empty($categories) && !is_wp_error($categories)) ? esc_attr($categories[0]->name) : 'Sans catégorie'; 
+        ?>">
         <img src="<?php echo get_template_directory_uri(); ?>/img/Icon_fullscreen.png">
         </button>
     </div>
