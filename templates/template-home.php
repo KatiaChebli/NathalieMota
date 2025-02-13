@@ -87,7 +87,6 @@ get_header();
                     data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
                     data-title="<?php the_title(); ?>">
                     <img src="<?php echo get_template_directory_uri(); ?>/img/Group.png">
-                <!-- 👁️ -->
             </button>
         
 
