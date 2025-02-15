@@ -86,8 +86,8 @@ get_header();
             <button type="button" class="view-icon" 
                     data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
                     data-title="<?php the_title(); ?>">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/Group.png">
-            </button>
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/Group.png" alt="Voir">
+                    </button>
         
 
         <!-- Icône loupe en haut à droite -->
