@@ -3,9 +3,9 @@
         <hr class="footer-line">
         <nav class="footer-nav">
             <ul>
-                <li><a href="#">Mentions légales</a></li>
-                <li><a href="#">Vie privée</a></li>
-                <li><a href="#">Tous droits réservés</a></li>
+                <li><a href="<?php echo site_url('/index.php/mentions-legales');?>">MENTIONS LÉGALES</a></li>
+                <li><a href="<?php echo site_url('/index.php/vie-privee');?>">VIE PRIVÉE</a></li>
+                <li><a href="<?php echo site_url('/index.php/tous-droits-reserves');?>">TOUS DROITS RÉSERVÉS</a></li>
             </ul>
         </nav>
     </div>
