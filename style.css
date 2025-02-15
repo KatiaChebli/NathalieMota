@@ -52,6 +52,96 @@ Text Domain: nathaliemota
     display: flex;
     justify-content: end;
 }
+.menu-toggle { /*burger menu cacher en desktop*/
+    display: none;
+}
+
+/* --- Responsive : Affichage du menu burger uniquement en mobile --- */
+@media (max-width: 768px) {
+    /* Cache le menu desktop en mobile */
+    .desktop-menu {
+        display: none;
+    }
+
+    .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Écarte le logo et le menu burger */
+        padding: 10px; /* Ajoute un peu de padding pour l'aération */
+    }
+
+    .logo {
+        width: auto; /* Garde la taille originale du logo */
+        max-width: 150px; /* Ajuste la taille du logo pour éviter qu’il prenne trop de place */
+    }
+
+    /* Affiche le bouton burger */
+    .menu-toggle {
+        display: flex;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        flex-direction: column;
+        gap: 5px;
+        z-index: 1001;
+        background-color: red;
+        margin-left: auto;
+    }
+
+    .menu-toggle .burger-bar {
+        display: block;
+        width: 30px;
+        height: 3px;
+        background: black;
+        transition: 0.3s ease;
+    }
+
+    /* Menu mobile (initialement caché) */
+    .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+        text-align: center;
+        z-index: 1000;
+    }
+
+    .mobile-menu .mobile-nav-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mobile-menu .mobile-nav-menu li {
+        padding: 15px 0;
+    }
+
+    .mobile-menu .mobile-nav-menu a {
+        text-decoration: none;
+        font-family: Space Mono;
+        font-size: 16px;
+        color: black;
+        font-weight: normal;
+        transition: color 0.3s ease;
+        text-transform: uppercase;
+    }
+
+    .mobile-menu .mobile-nav-menu a:hover {
+        color: #ff4d4d;
+    }
+
+    /* ✅ Afficher le menu mobile quand il est activé */
+    .mobile-menu.active {
+        display: block;
+    }
+}
+
+
 
 /*MODALE CONTACT*/
 /*bouton modal*/
@@ -101,7 +191,58 @@ Text Domain: nathaliemota
     font-size: 1.5rem;
     cursor: pointer;
 }
+/* --- Version mobile : activation du menu burger --- */
+@media (max-width: 768px) {
+    .menu-toggle {
+        /*display: none;  Caché par défaut */
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+    }
+    
+    .menu-toggle .burger-bar {
+        display: block;
+        width: 30px;
+        height: 3px;
+        background: black;
+        margin: 6px 0;
+        transition: 0.4s;
+    }
+    .menu-toggle {
+    display: block; /* Visible uniquement sur mobile */
+    }
 
+    .main-navigation {
+    display: none; /* Caché par défaut */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    background: black;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    }
+
+    .main-navigation.active {
+    display: flex;
+    }
+
+    .menu-container {
+    width: 100%;
+    padding: 20px 0;
+    }
+
+    .nav-menu {
+    flex-direction: column;
+    width: 100%;
+    }
+
+    .nav-menu li {
+    padding: 15px 0;
+    }
+}
 /*FORMULAIRE modal contact*/
 
 .wpcf7-form  { /*tt le formulaire*/
@@ -143,11 +284,6 @@ Text Domain: nathaliemota
 /********************* Fin HEADER **********************/
 
 /********************* HOME PAGE**********************/
-main {
-    margin-left: 50px; /* Ajoute une marge de 20px à gauche */
-    margin-right: 50px; /* Ajoute une marge de 20px à droite */
-}
-
 
 /*****Hero******/
 .hero {
@@ -170,6 +306,20 @@ font-family: Space Mono;
 font-style: italic;
 }
 
+/* Version mobile */
+@media (max-width: 480px) {
+    .hero {
+        min-height: 80vh; /* Réduit la hauteur */
+        padding: 10px; /* Moins de padding */
+    }
+
+    .hero-content h1 {
+        font-size: 30px; /* Texte plus petit */
+        -webkit-text-stroke: 0.8px white; /* Contour plus fin */
+        white-space: normal; /* Autorise la coupure du texte */
+    }
+}
+
 /*****Affichage des filtres******/
 #photo-filters {
     display: flex;
@@ -180,23 +330,15 @@ font-style: italic;
     margin-top: 60px;
     padding-left: 68px;
     padding-right: 68px;
-    /* margin-left: 50px;
-    margin-right: 50px; */
-    /* padding: 10px; */
 }
 .filter-group {
     display: flex;
     gap: 30px;
-    /* padding-left: 50px; */
 }
 .filter-group select {
     width: 250px;
     height: auto;
 }
-/* .order-group {
-    margin-left: auto;
-} */
-
 #photo-filters select,
 #photo-filters input,
 #photo-filters button {
@@ -213,6 +355,38 @@ font-style: italic;
     color: #fff;
     border: none;
     transition: background 0.3s ease;
+}
+
+/* --- Responsive : Affichage en colonne en mode mobile --- */
+@media (max-width: 768px) {
+    #photo-filters {
+    flex-direction: column; /* Met les filtres les uns au-dessous des autres */
+    align-items: center; /* Centre les filtres */
+    margin-top: 25px;
+    width: 22Opx;
+    }
+    .filter-group {
+        gap: 10px;
+    }
+
+    .filter-group,
+    .order-group {
+    flex-direction: column; /* Mets chaque filtre sur une ligne */
+    width: 100%;
+    align-items: center; /* Centre les filtres */
+    padding: 0%;
+    }
+    .order_by {
+        padding: O;
+    }
+
+    #photo-filters select,
+    #photo-filters input,
+    #photo-filters button {
+    width: 300%; /* Adapte la largeur au mobile */
+    height: 200%;
+    max-width: 300px; /* Évite que ça devienne trop large */
+    }
 }
 
 /****Affichage des photo home page *****/
@@ -240,6 +414,20 @@ font-style: italic;
     object-fit: cover;
     display: block;
 }
+
+@media (max-width: 768px) {
+    #photo-results {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        gap: 10px; /* Réduit l'espace entre les images */
+        width: 100%; /* Utilise toute la largeur */
+    }
+
+    .photo-item {
+        max-width: 80%; /* Prend toute la largeur */
+        aspect-ratio: auto; /* Enlève la contrainte carrée */
+    }
+}
+
 
 #load-more {
     display: block; /* S'assure qu'il prend toute la ligne */
@@ -406,7 +594,80 @@ width: 50%;
     object-fit: cover; /* Recadre pour que toutes les images remplissent l’espace */
     display: block;
 }
+/* --- Responsive--- */
+@media (max-width: 768px) {
+    .photo-details {
+        flex-direction: column; /* Affiche les éléments en colonne */
+        align-items: center; /* Centre le contenu */
+    }
 
+    .photo-image {
+        order: -1; /* Met l'image en premier */
+        width: 80%; /* Réduction de la taille de l'image */
+        max-width: 300px; /* Taille maximale */
+    }
+
+    .photo-image img {
+        width: 100%; /* Ajuste à la div */
+        height: auto; /* Conserve les proportions */
+    }
+
+    .photo-reference {
+        width: 90%; /* Largeur ajustée */
+        text-align: left; /* Aligne le texte à gauche */
+        margin: 0 auto; /* Centre le bloc mais garde le texte à gauche */
+    }
+
+    .photo-reference p {
+        font-size: 12px; /* Réduction de la taille du texte */
+        line-height: 1.4; /* Ajuste l'espacement pour la lisibilité */
+    }
+
+    .photo-title {
+        font-size: 40px; /* Réduction du titre */
+    }
+    .contact-wrapper {
+        flex-direction: column; /* Met les éléments en colonne */
+        align-items: flex-start; /* Aligne à gauche */
+        gap: 15px; /* Réduit l'espacement */
+        width: 90%; /* Alignement avec `.photo-container` */
+        margin: 0 auto; /* Centrer horizontalement */
+        padding-left: 5%; /* Décalage pour alignement */
+        margin-top: 15px;
+    }
+
+    .contact-text {
+        order: -1; /*Place le texte au-dessus du bouton */
+        font-size: 12px; /* Réduction de la taille du texte */
+        text-align: left; /* Alignement à gauche */
+        width: 100%; /* Prend toute la largeur */
+    }
+
+    .single-photo-contact {
+        width: 100%; /* Le bouton prend toute la largeur */
+        max-width: 250px; /* Taille max du bouton */
+        text-align: center;
+    }
+
+    /* Cacher lpreview */
+    .photo-navigation {
+        display: none;
+    }
+    .related-photos-container h2 {
+        text-align: center; /* ✅ Centre le titre */
+        width: 100%; /* ✅ Assure un alignement parfait */
+    }
+
+    .related-photos {
+        grid-template-columns: 1fr; /* ✅ Affiche les photos en une seule colonne */
+        gap: 20px; /* ✅ Ajoute un espacement entre les photos */
+    }
+
+    .related-photo {
+        max-width: 90%; /* ✅ Ajuste la taille des photos pour éviter qu'elles soient trop grandes */
+        margin: 0 auto; /* ✅ Centre les photos */
+    }
+}
 /***************************************** Lightbox **********************/
 /* Overlay noir de la lightbox */
 #lightbox-overlay {
@@ -526,9 +787,6 @@ width: 50%;
     flex: 1;
     text-align: right; /* Aligne la catégorie à droite */
 }
-
-
-
 .image-container img {
     display: block;
     width: 100%;
@@ -723,4 +981,13 @@ width: 50%;
     font-size: 14px;
     color: #000; /* Noir */
     text-transform: u
+}
+
+/* --- Responsive : Affichage en colonne en mobile --- */
+@media (max-width: 768px) {
+    .footer-nav ul {
+        flex-direction: column; /* Mets les liens les uns en dessous des autres */
+        align-items: center; /* Centre les liens */
+        gap: 15px; /* Espacement entre les liens */
+    }
 }

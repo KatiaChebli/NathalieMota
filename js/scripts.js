@@ -49,6 +49,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// burger menu format mobile
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("✅ Script menu chargé !"); // Vérifie si le script est bien chargé
+
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobileMenu = document.querySelector(".mobile-menu");
+
+    if (menuToggle && mobileMenu) {
+        console.log("✅ Bouton menu burger et menu mobile trouvés !"); // Vérifie si les éléments existent
+
+        menuToggle.addEventListener("click", function (event) {
+            event.stopPropagation(); // Empêche la propagation pour éviter de fermer immédiatement
+            mobileMenu.classList.toggle("active");
+            console.log("✅ Menu burger cliqué !"); // Vérifie si le clic fonctionne
+
+            if (mobileMenu.classList.contains("active")) {
+                console.log("✅ Menu mobile affiché !");
+            } else {
+                console.log("✅ Menu mobile caché !");
+            }
+        });
+
+        // Fermer le menu si on clique en dehors
+        document.addEventListener("click", function (event) {
+            if (!menuToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.remove("active");
+                console.log("✅ Menu mobile fermé en cliquant en dehors !");
+            }
+        });
+
+        // Fermer le menu si un lien est cliqué
+        mobileMenu.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", function () {
+                mobileMenu.classList.remove("active");
+                console.log("✅ Menu mobile fermé après clic sur un lien !");
+            });
+        });
+    } else {
+        console.error("❌ Erreur : Bouton menu burger ou menu mobile introuvable !");
+    }
+});
+
+
+
+
 
 //photo preview single-page
 document.addEventListener('DOMContentLoaded', () => {
@@ -77,6 +122,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ETAPE 4 filtres Ajax
+// document.getElementById('photo-filters').addEventListener('submit', function (e) {
+//     e.preventDefault();
+
+//     const format = document.getElementById('format').value;
+//     const category = document.getElementById('category').value;
+//     const orderBy = document.getElementById('order_by').value;
+
+//     const params = new URLSearchParams({
+//         format: format,
+//         category: category,
+//         order_by: orderBy,
+//     });
+
+//     fetch(ajaxurl + '?action=filter_photos&' + params.toString(), {
+//         method: 'GET',
+//     })
+//         .then(response => response.text())
+//         .then(data => {
+//             document.getElementById('photo-results').innerHTML = data; // Met à jour les résultats
+//         })
+//         .catch(error => console.error('Erreur :', error));
+// });
+
 document.getElementById('photo-filters').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -96,6 +164,7 @@ document.getElementById('photo-filters').addEventListener('submit', function (e)
         .then(response => response.text())
         .then(data => {
             document.getElementById('photo-results').innerHTML = data; // Met à jour les résultats
+            updateLightboxEvents(); // Réattache la lightbox aux nouvelles images
         })
         .catch(error => console.error('Erreur :', error));
 });

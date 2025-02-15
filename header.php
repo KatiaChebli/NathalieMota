@@ -17,8 +17,15 @@
             </a>
         </div>
 
+        <!-- Bouton du menu burger (visible seulement en mobile) -->
+        <button class="menu-toggle" aria-label="Ouvrir le menu">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        </button>
+
         <!-- Menu de navigation -->
-        <nav class="main-navigation">
+        <nav class="main-navigation mobile-menu">
             <?php
             wp_nav_menu(
                 array(
