@@ -50,7 +50,7 @@ function redirectToSinglePage(event) {
     if (url) {
         window.location.href = url;
     } else {
-        console.error("❌ Erreur : URL de redirection manquante.");
+        console.error("Erreur : URL de redirection manquante.");
     }
 }
 
