@@ -383,7 +383,9 @@ border-bottom: 1px solid black;
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 colonnes égales */
 }
-
+/* .related-photo:hover {
+    width: 500px;
+} */
 /* Conteneur de chaque photo */
 .related-photo {
     overflow: hidden; /* Gérer le contenu qui dépasse */
@@ -403,7 +405,7 @@ border-bottom: 1px solid black;
     display: block;
 }
 
-/********************* Lightbox **********************/
+/***************************************** Lightbox **********************/
 /* Overlay noir de la lightbox */
 #lightbox-overlay {
     position: fixed;
@@ -614,6 +616,75 @@ border-bottom: 1px solid black;
 
 .view-icon:hover {
     transform: scale(1.2); /* Agrandit l'icône au survol */
+}
+
+/********************* overlay single page photo apparentées**********************/
+
+/* Cacher les icônes par défaut */
+.related-photo .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    opacity: 0; /* Caché par défaut */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Afficher l'overlay au survol */
+.related-photo:hover .overlay {
+    opacity: 1;
+}
+
+/* Style des icônes */
+.related-photo .view-icon, 
+.related-photo .zoom-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.related-photo .view-icon:hover, 
+.related-photo .zoom-icon:hover {
+    transform: scale(1.2); /* Effet zoom au survol */
+}
+
+/* Style du titre et de la catégorie */
+.overlay-info {
+    position: absolute;
+    bottom: 10px;
+    /* left: 5%;
+    right: 5%; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-size: 12px;
+}
+
+/* Style du titre (à gauche) */
+.overlay-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0;
+    padding-left: 5px;
+    text-align: left;
+    flex: 1; 
+}
+
+/* Style de la catégorie (à droite) */
+.overlay-category {
+    text-transform: uppercase;
+    margin: 0;
+    text-align: right;
+    flex: 1; 
+    padding-right: 5px;
 }
 
 

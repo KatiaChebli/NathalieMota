@@ -147,6 +147,42 @@ if ($post_id && get_post($post_id)) {
                                 <?php the_post_thumbnail('medium'); // Afficher l'image de taille moyenne ?>
                             <?php endif; ?>
                         </a>
+
+                    <!-- Overlay qui contient les icônes "View" et "Zoom" -->
+                    <div class="overlay">
+                    <!-- Bouton "œil" qui redirige vers la single page-->
+                    <button type="button" class="view-icon" 
+                            data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
+                            data-title="<?php the_title(); ?>"
+                            data-url="<?php echo esc_url($single_page_url) . '?postid=' . get_the_ID(); ?>">
+                            <img src="<?php echo get_template_directory_uri(); ?>/img/Group.png" alt="Voir">
+                    </button>
+                   
+                    <button type="button" class="zoom-icon" 
+                    data-large="<?php echo get_the_post_thumbnail_url(); ?>" 
+                    data-reference="<?php 
+                    $reference = SCF::get('reference'); 
+                    echo !empty($reference) ? esc_html($reference) : 'Non spécifié';
+                    ?>"  
+                    data-category="<?php 
+                    $categories = get_the_terms(get_the_ID(), 'categorie');
+                    echo (!empty($categories) && !is_wp_error($categories)) ? esc_attr($categories[0]->name) : 'Sans catégorie'; 
+                    ?>">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/Icon_fullscreen.png">
+                    </button> 
+
+                      <!-- Titre et Catégorie en bas -->
+        <div class="overlay-info">
+            <h3 class="overlay-title"><?php the_title(); ?></h3>
+            <p class="overlay-category">
+                <?php
+                $categories = get_the_terms(get_the_ID(), 'categorie');
+                echo (!empty($categories) && !is_wp_error($categories)) ? esc_html($categories[0]->name) : 'Sans catégorie';
+                ?>
+            </p>
+        </div>
+
+                    </div>
                     </div>
                 <?php endwhile;
                 wp_reset_postdata(); // Réinitialiser la requête principale
