@@ -262,18 +262,20 @@ font-style: italic;
     justify-content: space-around; /* Espace entre les deux blocs */
     align-items: flex-end; /* Aligne les éléments en haut */
     flex: 1;
-    max-width: 1200px;
-    /*gap: 20px; Espace entre les deux blocs */
 }
 
 .photo-image {
     flex: 1; /* Permet à l'image de prendre l'espace nécessaire */
     display: flex;
     justify-content: center;
+    width: 50%;
 }
-
+.photo-image img {
+    width: 100%;
+}
 .photo-reference{
 border-bottom: 1px solid black;
+width: 50%;
 }
 
 .photo-reference p  {
@@ -609,9 +611,9 @@ border-bottom: 1px solid black;
     position: absolute;
     top: 45%;
     left: 45%;
-    color: white;
     cursor: pointer;
     transition: transform 0.3s ease;
+    border: none;
 }
 
 .view-icon:hover {
