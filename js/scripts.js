@@ -91,15 +91,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-
-
-
-
 //photo preview single-page
+
 document.addEventListener('DOMContentLoaded', () => {
     const navContainers = document.querySelectorAll('.nav-container');
+    const photoNavigation = document.querySelector('.photo-navigation');
+    const photoImage = document.querySelector('.photo-image img'); // Sélectionne l'image actuelle
 
-    if (navContainers.length === 0) return;
+    if (!photoNavigation || !photoImage || navContainers.length === 0) return;
+
+    // Création d'une div pour afficher l'image actuelle par défaut
+    const currentImageContainer = document.createElement('div');
+    currentImageContainer.classList.add('photo-preview', 'current-preview'); // Nouvelle classe pour distinguer l'image courante
+    currentImageContainer.style.backgroundImage = `url(${photoImage.src})`;
+
+    // Ajouter cette div au DOM pour qu'elle s'affiche par défaut
+    photoNavigation.appendChild(currentImageContainer);
 
     navContainers.forEach(container => {
         const link = container.querySelector('.nav-link');
@@ -109,42 +116,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const thumbnail = link.getAttribute('data-thumbnail');
             if (thumbnail) {
                 preview.style.backgroundImage = `url(${thumbnail})`;
-                preview.classList.remove('hidden'); // Afficher l'image
+                preview.classList.remove('hidden'); // Afficher la miniature
+                currentImageContainer.classList.add('hidden'); // Cacher l'image courante
             }
         });
 
         link.addEventListener('mouseleave', () => {
-            preview.classList.add('hidden'); // Cacher l'image
+            preview.classList.add('hidden'); // Cacher la miniature
+            currentImageContainer.classList.remove('hidden'); // Réafficher l'image courante
         });
     });
 });
 
 
-
 // ETAPE 4 filtres Ajax
-// document.getElementById('photo-filters').addEventListener('submit', function (e) {
-//     e.preventDefault();
-
-//     const format = document.getElementById('format').value;
-//     const category = document.getElementById('category').value;
-//     const orderBy = document.getElementById('order_by').value;
-
-//     const params = new URLSearchParams({
-//         format: format,
-//         category: category,
-//         order_by: orderBy,
-//     });
-
-//     fetch(ajaxurl + '?action=filter_photos&' + params.toString(), {
-//         method: 'GET',
-//     })
-//         .then(response => response.text())
-//         .then(data => {
-//             document.getElementById('photo-results').innerHTML = data; // Met à jour les résultats
-//         })
-//         .catch(error => console.error('Erreur :', error));
-// });
-
 document.getElementById('photo-filters').addEventListener('submit', function (e) {
     e.preventDefault();
 

@@ -87,8 +87,9 @@ if ($post_id && get_post($post_id)) {
     <!-- data-ref-photo="XXX" qui contient la ref -->
     <?php get_template_part('template_parts/contact-modal'); ?>
 
-     <!-- Liens de navigation -->
-     <div class="photo-navigation">
+
+    <!-- Liens de navigation -->
+<div class="photo-navigation">
     <?php
     $prev_post = get_previous_post();
     $next_post = get_next_post();
@@ -126,18 +127,37 @@ if ($post_id && get_post($post_id)) {
         <div class="related-photos">
             <?php
             $current_post_id = get_the_ID(); // ID de l'article actuel
-            $args = array(
-                'post_type'      => 'Photos', // Type de contenu 
-                'posts_per_page' => 2,       // 2 photos
-                'post__not_in'   => array($current_post_id), // Exclure l'article actuel
-                'orderby'        => 'rand', // Afficher aléatoirement
-            );
+
+            $categories = get_the_terms($current_post_id, 'categorie'); // Récupère les catégories de la photo actuelle
+
+        if (!empty($categories) && !is_wp_error($categories)) {
+            $category_ids = array_map(function($cat) {
+                return $cat->term_id;
+            }, $categories);
+        } else {
+            $category_ids = array(); // Si pas de catégorie, évite erreur
+        }
+
+        $args = array(
+            'post_type'      => 'photos',
+            'posts_per_page' => 2,
+            'post__not_in'   => array($current_post_id), // Exclut la photo en cours
+            'orderby'        => 'rand',
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'categorie',
+                    'field'    => 'term_id',
+                    'terms'    => $category_ids, // Filtre par catégorie
+                ),
+            ),
+        );
 
             $related_photos_query = new WP_Query($args);
 
             if ($related_photos_query->have_posts()) :
                 while ($related_photos_query->have_posts()) :
                     $related_photos_query->the_post(); 
+
 
                     // Récupérer l'URL de la page single et ajouter l'ID de la photo
                     $single_page_url = get_permalink(get_page_by_path('single-page')->ID);
